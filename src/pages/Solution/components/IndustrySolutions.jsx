@@ -79,7 +79,7 @@ export default function IndustrySolutions() {
                   <li key={f} className="flex items-start gap-3 text-[15px] font-medium text-gray-800 dark:text-slate-300">
                     <span className="flex items-center justify-center w-6 h-6 rounded-full bg-orange-100 dark:bg-orange-500/20 text-orange-600 flex-shrink-0">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    </span> 
+                    </span>
                     {f}
                   </li>
                 ))}
@@ -88,13 +88,13 @@ export default function IndustrySolutions() {
                 {row.cta}
               </Link>
             </div>
-            
+
             {/* Visual Graphic Segment */}
             <div className="flex-1 w-full flex items-center justify-center bg-gray-50 dark:bg-[#1e293b] rounded-[24px] overflow-hidden min-h-[400px] border border-gray-100 dark:border-slate-800 shadow-sm">
               <div className="text-center px-10">
-                 {/* Decorative block standing in for dynamic visual */}
+                {/* Decorative block standing in for dynamic visual */}
                 <div className="w-24 h-24 bg-gradient-to-br from-orange-400 to-rose-500 rounded-2xl mx-auto mb-6 shadow-xl shadow-orange-500/20 transform rotate-3 flex items-center justify-center">
-                  <span className="text-white font-extrabold text-[24px] uppercase tracking-tighter opacity-90">{row.id.substring(0,2)}</span>
+                  <span className="text-white font-extrabold text-[24px] uppercase tracking-tighter opacity-90">{row.id.substring(0, 2)}</span>
                 </div>
                 <h3 className="text-[20px] font-bold text-gray-900 dark:text-slate-100">{row.label.split('&')[0]}</h3>
                 <div className="w-16 h-1 bg-orange-500/50 mx-auto mt-4 rounded-full"></div>
