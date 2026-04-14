@@ -8,8 +8,8 @@ export default function Testimonial() {
         <div className="flex items-center justify-center gap-3.5">
           <div className="w-11 h-11 rounded-full bg-gradient-to-br from-orange-600 to-orange-400 flex items-center justify-center text-sm font-bold text-white flex-shrink-0 shadow-lg shadow-orange-600/20">JK</div>
           <div className="text-left">
-            <div className="text-sm font-bold text-gray-900 dark:text-slate-200">Jorik Kraaikamp Mulder</div>
-            <div className="text-[13px] text-gray-500 dark:text-slate-400">Chief Operations Officer, Stepler</div>
+            <div className="text-sm font-bold text-gray-900 dark:text-slate-200">Enterprise Operations Lead</div>
+            <div className="text-[13px] text-gray-500 dark:text-slate-400">Chief Operations Officer, LedgerCart Client Organization</div>
           </div>
         </div>
       </div>

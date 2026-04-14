@@ -133,7 +133,7 @@ export default function ContactForm({ isModal = false, onSuccess }) {
         </div>
         <div className="space-y-2">
           <label className="text-sm font-semibold text-gray-700 dark:text-slate-300">Work Email</label>
-          <input required name="email" type="email" placeholder="john@company.com"
+          <input required name="email" type="email" placeholder="info@ledgercart.in"
             className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-100 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all placeholder-gray-400 dark:placeholder-slate-600" />
         </div>
       </div>
@@ -141,7 +141,7 @@ export default function ContactForm({ isModal = false, onSuccess }) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <label className="text-sm font-semibold text-gray-700 dark:text-slate-300">Company Name</label>
-          <input required name="company" type="text" placeholder="Acme Corp"
+          <input required name="company" type="text" placeholder="Your Company Name"
             className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-100 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all placeholder-gray-400 dark:placeholder-slate-600" />
         </div>
         <div className="space-y-2">

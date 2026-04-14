@@ -123,7 +123,7 @@ export default function BlogPage() {
              <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
                <input 
                  type="email" 
-                 placeholder="yourname@company.com" 
+                 placeholder="yourname@ledgercart.in" 
                  className="flex-1 px-5 py-3 rounded-xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 focus:border-orange-500 outline-none transition-all placeholder:text-[13px]"
                />
                <button className="px-8 py-3 bg-orange-600 text-white font-bold rounded-xl hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20 active:scale-95">Subscribe</button>

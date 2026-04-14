@@ -124,7 +124,7 @@ export default function UserManagement() {
               <div>
                 <label className="block text-xs font-bold text-gray-500 dark:text-slate-400 uppercase tracking-widest mb-2">Email Address</label>
                 <input type="email" required value={email} onChange={e => setEmail(e.target.value)}
-                  placeholder="hr@ledgercart.com"
+                  placeholder="admin@ledgercart.in"
                   className="w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-gray-900 dark:text-slate-100 text-sm outline-none focus:border-orange-500 transition-all" />
               </div>
 
