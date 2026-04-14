@@ -45,7 +45,7 @@ function Footer() {
                    </svg>
                  </div>
                  <div>
-                   <h4 className="text-[13px] font-bold text-gray-900 dark:text-slate-100 leading-none mb-1">Sales & Enquiries</h4>
+                   <h4 className="text-[13px] font-bold text-gray-900 dark:text-slate-100 leading-none mb-1">Sales and Enquiries</h4>
                    <a href="mailto:sales@ledgercart.in" className="text-sm font-medium text-orange-600 hover:text-orange-700 hover:underline">sales@ledgercart.in</a>
                  </div>
               </div>
