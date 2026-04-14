@@ -1,0 +1,52 @@
+name: Contribute Branch | Post-Merge Promote To Test
+run-name: Contribute Push Promote | ref:${{ github.ref_name }}
+
+on:
+  push:
+    branches:
+      - contribute
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: contribute-post-merge-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  promote-to-test:
+    name: Contribute Push | Create PR To Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Create or reuse Pull Request to test branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          EXISTING_PR="$(gh pr list --base test --head contribute --state open --json number --jq '.[0].number')"
+          if [ -n "$EXISTING_PR" ]; then
+            echo "Open PR #$EXISTING_PR already exists from contribute to test."
+            exit 0
+          fi
+
+          git fetch origin test --depth=1
+          if git diff --quiet origin/test...HEAD; then
+            echo "No differences between contribute and test. Skipping PR creation."
+            exit 0
+          fi
+
+          gh pr create \
+            --base test \
+            --head contribute \
+            --title "Automated PR: contribute to test" \
+            --body "Auto-created after merge into contribute. Contribute pre-safety checks are enforced at PR time before merge."

@@ -1,9 +1,7 @@
-name: Contribute Quality Gate
+name: Contribute Branch | PR Pre-Safety Gate
+run-name: Contribute PR Gate | base:${{ github.base_ref }} | head:${{ github.head_ref }}
 
 on:
-  push:
-    branches:
-      - contribute
   pull_request:
     branches:
       - contribute
@@ -13,12 +11,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: contribute-quality-${{ github.ref }}
+  group: contribute-pr-gate-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 jobs:
   validate-code:
-    name: Pre-Safety and Post-Merge Validation
+    name: Contribute PR | Pre-Safety Validation (Required)
     runs-on: ubuntu-latest
     timeout-minutes: 15
     
@@ -51,15 +49,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            BASE_BRANCH="${{ github.base_ref }}"
-          else
-            BASE_BRANCH="test"
-            if ! git ls-remote --exit-code --heads origin test >/dev/null 2>&1; then
-              BASE_BRANCH="main"
-            fi
-          fi
+          BASE_BRANCH="${{ github.base_ref }}"
 
           git fetch origin "$BASE_BRANCH" --depth=1
           CHANGED_JS="$(git diff --name-only origin/$BASE_BRANCH...HEAD | grep -E '\\.(js|jsx|ts|tsx)$' || true)"
@@ -167,39 +157,3 @@ jobs:
 
       - name: Audit production dependencies (high and critical)
         run: npm audit --omit=dev --audit-level=high
-
-  create-pr:
-    name: Create PR to test branch
-    needs: validate-code
-    if: github.event_name == 'push' && github.ref == 'refs/heads/contribute'
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    
-    permissions:
-      contents: write
-      pull-requests: write
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-
-      - name: Create or reuse Pull Request to test branch
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          EXISTING_PR="$(gh pr list --base test --head contribute --state open --json number --jq '.[0].number')"
-
-          if [ -n "$EXISTING_PR" ]; then
-            echo "Open PR #$EXISTING_PR already exists from contribute to test."
-            exit 0
-          fi
-
-          gh pr create \
-            --base test \
-            --head contribute \
-            --title "Automated PR: contribute to test" \
-            --body "Auto-created after contribute branch passed validation checks (changed-files lint, optional tests, production build, and dependency audit)."
