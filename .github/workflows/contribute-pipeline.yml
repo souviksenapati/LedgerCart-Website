@@ -68,7 +68,15 @@ jobs:
         run: npm run test --if-present
 
       - name: Build application
-        run: npm run build
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          export VITE_SUPABASE_URL="${VITE_SUPABASE_URL:-https://placeholder.supabase.co}"
+          export VITE_SUPABASE_ANON_KEY="${VITE_SUPABASE_ANON_KEY:-placeholder-anon-key}"
+          npm run build
 
       - name: Audit production dependencies (high and critical)
         run: npm audit --omit=dev --audit-level=high
