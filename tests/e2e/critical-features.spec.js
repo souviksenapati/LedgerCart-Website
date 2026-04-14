@@ -31,7 +31,7 @@ test.describe('Critical Feature Validation', () => {
 
     const linkedin = page.getByLabel('LinkedIn')
     await expect(linkedin).toBeVisible()
-    await expect(linkedin).toHaveAttribute('href', /https:\/\/www\.linkedin\.com\/company\/ledgercart\/(\?viewAsMember=true)?/)
+    await expect(linkedin).toHaveAttribute('href', 'https://www.linkedin.com/company/ledgercart/')
   })
 
   test('important public routes render successfully', async ({ page }) => {
