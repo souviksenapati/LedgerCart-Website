@@ -183,7 +183,7 @@ function Footer() {
           <div className="flex items-center gap-3 text-sm text-gray-500 dark:text-slate-500">
             <span>Follow us on:</span>
             <a
-              href="https://www.linkedin.com/company/ledgercart/?viewAsMember=true"
+              href="https://www.linkedin.com/company/ledgercart/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
