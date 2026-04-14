@@ -46,7 +46,7 @@ function Footer() {
                  </div>
                  <div>
                    <h4 className="text-[13px] font-bold text-gray-900 dark:text-slate-100 leading-none mb-1">Sales & Enquiries</h4>
-                   <a href="mailto:hello@ledgercart.com" className="text-sm font-medium text-orange-600 hover:text-orange-700 hover:underline">hello@ledgercart.com</a>
+                   <a href="mailto:sales@ledgercart.in" className="text-sm font-medium text-orange-600 hover:text-orange-700 hover:underline">sales@ledgercart.in</a>
                  </div>
               </div>
               <div className="flex items-start gap-3">
@@ -57,7 +57,18 @@ function Footer() {
                  </div>
                  <div>
                    <h4 className="text-[13px] font-bold text-gray-900 dark:text-slate-100 leading-none mb-1">Technical Support</h4>
-                   <a href="mailto:support@ledgercart.com" className="text-sm font-medium text-orange-600 hover:text-orange-700 hover:underline">support@ledgercart.com</a>
+                   <a href="mailto:support@ledgercart.in" className="text-sm font-medium text-orange-600 hover:text-orange-700 hover:underline">support@ledgercart.in</a>
+                 </div>
+              </div>
+              <div className="flex items-start gap-3">
+                 <div className="w-8 h-8 rounded-full bg-orange-50 dark:bg-orange-900/20 text-orange-600 flex items-center justify-center shrink-0">
+                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm4 4h10m-10 4h10m-10 4h7" />
+                   </svg>
+                 </div>
+                 <div>
+                   <h4 className="text-[13px] font-bold text-gray-900 dark:text-slate-100 leading-none mb-1">General Contact</h4>
+                   <a href="mailto:info@ledgercart.in" className="text-sm font-medium text-orange-600 hover:text-orange-700 hover:underline">info@ledgercart.in</a>
                  </div>
               </div>
               <div className="flex items-start gap-3">
@@ -68,8 +79,8 @@ function Footer() {
                    </svg>
                  </div>
                  <div>
-                   <h4 className="text-[13px] font-bold text-gray-900 dark:text-slate-100 leading-none mb-1">Global Headquarters</h4>
-                   <p className="text-gray-500 dark:text-slate-500 text-[13px] leading-tight mt-0.5">123 Tech Boulevard, Suite 500<br/>San Francisco, CA 94105</p>
+                   <h4 className="text-[13px] font-bold text-gray-900 dark:text-slate-100 leading-none mb-1">Office Address</h4>
+                   <p className="text-gray-500 dark:text-slate-500 text-[13px] leading-tight mt-0.5">Moni Bhander, Module C,<br/>WEBEL Bhawan, EP &amp; GP Block, Sector V,<br/>Salt Lake, Kolkata, West Bengal 700091, India</p>
                  </div>
               </div>
             </div>
@@ -156,7 +167,7 @@ function Footer() {
         {/* Bottom Bar */}
         <div className="py-5 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-500 dark:text-slate-400">Theme:</span>
+            <span className="text-sm text-gray-500 dark:text-slate-400">Theme :</span>
             {themes.map((t) => (
               <button
                 key={t.id}
@@ -171,9 +182,15 @@ function Footer() {
           </div>
           <div className="flex items-center gap-3 text-sm text-gray-500 dark:text-slate-500">
             <span>Follow us on:</span>
-            {['𝕏', '⬡', '▶'].map((icon) => (
-              <a key={icon} href="#" className="text-base text-gray-500 dark:text-slate-400 hover:text-orange-600 transition-colors no-underline">{icon}</a>
-            ))}
+            <a
+              href="https://www.linkedin.com/company/ledgercart/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="text-base text-gray-500 dark:text-slate-400 hover:text-orange-600 transition-colors no-underline font-semibold"
+            >
+              in
+            </a>
             <span className="flex items-center gap-1.5">
               <span className="w-[7px] h-[7px] rounded-full bg-amber-400 inline-block"></span>
               Live Systems

@@ -188,7 +188,7 @@ export default function CareerApplicationForm() {
               </div>
               <div>
                 <label className={labelCls}>Email Address <span className="text-orange-500">*</span></label>
-                <input required name="email" type="email" placeholder="jane@company.com" className={inputCls} />
+                <input required name="email" type="email" placeholder="candidate@ledgercart.in" className={inputCls} />
               </div>
             </div>
 

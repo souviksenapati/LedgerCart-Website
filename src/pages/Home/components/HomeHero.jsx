@@ -27,7 +27,7 @@ const SIDEBAR_ITEMS = [
   { icon: '⚙', label: 'Settings' },
 ]
 
-/* ── Faithful Sevalla/LedgerCart App Dashboard ─────────────────────── */
+/* ── LedgerCart App Dashboard Preview ─────────────────────── */
 const DashboardPreview = () => (
   <div className="w-full max-w-[900px] mx-auto">
     <div
@@ -48,7 +48,7 @@ const DashboardPreview = () => (
           <LogoSmall />
           <span className="ml-1 font-semibold text-gray-700 dark:text-slate-300">LedgerCart</span>
           <span className="text-gray-300 dark:text-slate-700">›</span>
-          <span>ACME</span>
+          <span>LedgerCart</span>
           <span className="text-gray-300 dark:text-slate-700">›</span>
           <span>Finance module</span>
           <span className="text-gray-300 dark:text-slate-700">›</span>
@@ -68,7 +68,7 @@ const DashboardPreview = () => (
           {/* Workspace switcher */}
           <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-100 dark:border-slate-800">
             <div className="w-5 h-5 rounded bg-gray-800 dark:bg-slate-700 flex items-center justify-center text-white text-[9px] font-bold flex-shrink-0">A</div>
-            <span className="font-semibold text-gray-700 dark:text-slate-300 text-xs flex-1 truncate">ACME</span>
+            <span className="font-semibold text-gray-700 dark:text-slate-300 text-xs flex-1 truncate">LedgerCart</span>
             <span className="text-gray-400 dark:text-slate-600 text-[10px]">⌄</span>
           </div>
 
@@ -103,7 +103,7 @@ const DashboardPreview = () => (
               <div className="w-5 h-5 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-[8px] font-bold text-white flex-shrink-0">J</div>
               <div className="flex-1 min-w-0">
                 <div className="text-[10px] font-semibold text-gray-700 dark:text-slate-300 truncate">John Doe</div>
-                <div className="text-[9px] text-gray-400 dark:text-slate-600 truncate">john@acme.com</div>
+                <div className="text-[9px] text-gray-400 dark:text-slate-600 truncate">info@ledgercart.in</div>
               </div>
               <span className="text-gray-300 dark:text-slate-700 text-[10px]">⋯</span>
             </div>
