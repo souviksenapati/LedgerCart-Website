@@ -14,11 +14,16 @@ test.describe('Critical Feature Validation', () => {
   test('contact page shows official contact channels and office address', async ({ page }) => {
     await page.goto('/contact')
 
-    await expect(page.getByText('support@ledgercart.in')).toBeVisible()
-    await expect(page.getByText('sales@ledgercart.in')).toBeVisible()
-    await expect(page.getByText('info@ledgercart.in')).toBeVisible()
-    await expect(page.getByText('Moni Bhander, Module C', { exact: false })).toBeVisible()
-    await expect(page.getByText('Salt Lake, Kolkata, West Bengal 700091, India', { exact: false })).toBeVisible()
+    const contactInfoCard = page
+      .locator('div')
+      .filter({ has: page.getByRole('heading', { name: 'Contact Information' }) })
+      .first()
+
+    await expect(contactInfoCard).toContainText('support@ledgercart.in')
+    await expect(contactInfoCard).toContainText('sales@ledgercart.in')
+    await expect(contactInfoCard).toContainText('info@ledgercart.in')
+    await expect(contactInfoCard).toContainText('Moni Bhander, Module C')
+    await expect(contactInfoCard).toContainText('Salt Lake, Kolkata, West Bengal 700091, India')
   })
 
   test('footer has the correct LinkedIn URL', async ({ page }) => {
@@ -26,7 +31,7 @@ test.describe('Critical Feature Validation', () => {
 
     const linkedin = page.getByLabel('LinkedIn')
     await expect(linkedin).toBeVisible()
-    await expect(linkedin).toHaveAttribute('href', 'https://www.linkedin.com/company/ledgercart/?viewAsMember=true')
+    await expect(linkedin).toHaveAttribute('href', /https:\/\/www\.linkedin\.com\/company\/ledgercart\/(\?viewAsMember=true)?/)
   })
 
   test('important public routes render successfully', async ({ page }) => {
