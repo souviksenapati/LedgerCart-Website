@@ -6,7 +6,8 @@ on:
       - contribute
   pull_request:
     branches:
-      - test
+      - contribute
+    types: [opened, synchronize, reopened, ready_for_review]
 
 permissions:
   contents: read
@@ -17,7 +18,7 @@ concurrency:
 
 jobs:
   validate-code:
-    name: Validate Contribute Branch
+    name: Pre-Safety and Post-Merge Validation
     runs-on: ubuntu-latest
     timeout-minutes: 15
     
@@ -50,9 +51,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          BASE_BRANCH="test"
-          if ! git ls-remote --exit-code --heads origin test >/dev/null 2>&1; then
-            BASE_BRANCH="main"
+
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_BRANCH="${{ github.base_ref }}"
+          else
+            BASE_BRANCH="test"
+            if ! git ls-remote --exit-code --heads origin test >/dev/null 2>&1; then
+              BASE_BRANCH="main"
+            fi
           fi
 
           git fetch origin "$BASE_BRANCH" --depth=1
