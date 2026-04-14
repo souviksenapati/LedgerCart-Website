@@ -181,7 +181,7 @@ function Footer() {
             © 2026 LedgerCart IT Solutions. All rights reserved. LedgerCart® is a registered trademark.
           </div>
           <div className="flex items-center gap-3 text-sm text-gray-500 dark:text-slate-500">
-            <span>Follow us on :</span>
+            <span>Follow us on:</span>
             <a
               href="https://www.linkedin.com/company/ledgercart/"
               target="_blank"
