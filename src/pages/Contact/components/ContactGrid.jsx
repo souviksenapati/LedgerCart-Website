@@ -12,6 +12,12 @@ export default function ContactGrid() {
            <p className="text-gray-500 dark:text-slate-400 mb-4 leading-relaxed">
              Fill out the form and our team will get back to you within 24 hours. For technical support, please use the dedicated dashboard portal.
            </p>
+           <div className="space-y-3 text-sm text-gray-600 dark:text-slate-300">
+             <p><span className="font-semibold text-gray-900 dark:text-slate-100">Support:</span> support@ledgercart.in</p>
+             <p><span className="font-semibold text-gray-900 dark:text-slate-100">Sales:</span> sales@ledgercart.in</p>
+             <p><span className="font-semibold text-gray-900 dark:text-slate-100">Contact:</span> info@ledgercart.in</p>
+             <p className="pt-1 leading-relaxed"><span className="font-semibold text-gray-900 dark:text-slate-100">Address:</span> Moni Bhander, Module C, WEBEL Bhawan, EP &amp; GP Block, Sector V, Salt Lake, Kolkata, West Bengal 700091, India</p>
+           </div>
         </div>
 
         {/* Social Proof */}
@@ -24,7 +30,7 @@ export default function ContactGrid() {
              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-gray-200 to-gray-400 dark:from-slate-700 dark:to-slate-500"></div>
              <div>
                <p className="text-xs font-bold text-gray-900 dark:text-slate-200">Sarah Jenkins</p>
-               <p className="text-xs text-gray-500 dark:text-slate-500">CTO, DataCorp</p>
+               <p className="text-xs text-gray-500 dark:text-slate-500">CTO, LedgerCart Client Partner</p>
              </div>
            </div>
         </div>

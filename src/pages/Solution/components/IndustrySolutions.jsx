@@ -7,6 +7,8 @@ const solutions = [
     title: 'Secure, Compliant Healthcare Platforms',
     desc: 'Empower patients and providers with HIPAA-compliant healthcare solutions. We deliver telemedicine apps, electronic health records (EHR) integration, and scalable patient portals focused on delivering better care.',
     features: ['HIPAA / GDPR Compliance', 'EHR & EMR Integrations', 'Telemedicine infrastructure', 'IoT Medical device syncing'],
+    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1400&q=80',
+    imageAlt: 'Doctors collaborating around digital healthcare systems',
     reverse: false,
     cta: 'Learn More',
     to: '#'
@@ -17,6 +19,8 @@ const solutions = [
     title: 'Bank-Grade Financial Technology',
     desc: 'Revolutionize the financial world with highly secure, low-latency transaction systems. From digital wallets to blockchain integrations, we build uncompromised fintech architectures.',
     features: ['High-frequency trading platforms', 'PCI-DSS compliant infrastructure', 'Blockchain & Crypto solutions', 'Fraud detection AI'],
+    image: 'https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=1400&q=80',
+    imageAlt: 'Fintech dashboards and digital payment analytics',
     reverse: true,
     cta: 'Explore FinTech',
     to: '#'
@@ -27,6 +31,8 @@ const solutions = [
     title: 'Transform the Learning Experience',
     desc: 'Scale online education with interactive, video-ready platforms. We build Learning Management Systems (LMS), virtual classrooms, and data-driven student performance trackers.',
     features: ['Video streaming & Virtual Classrooms', 'LMS & SCORM compliance', 'Gamified learning tools', 'Student analytics dashboards'],
+    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1400&q=80',
+    imageAlt: 'Students using digital learning platform on laptops',
     reverse: false,
     cta: 'Start Building',
     to: '/contact'
@@ -37,6 +43,8 @@ const solutions = [
     title: 'Omnichannel Commerce at Scale',
     desc: 'Deliver seamless shopping experiences with lightning-fast storefronts, robust payment gateways, and unified inventory management systems ready for the modern retail era.',
     features: ['Headless commerce architecture', 'Global payment gateway integrations', 'Real-time inventory syncing', 'AI-powered product recommendations'],
+    image: 'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1400&q=80',
+    imageAlt: 'Modern online shopping and retail checkout experience',
     reverse: true,
     cta: 'View Retail Solutions',
     to: '#'
@@ -47,6 +55,8 @@ const solutions = [
     title: 'Intelligent Supply Chain Management',
     desc: 'Optimize your entire logistics network using real-time tracking, predictive demand forecasting, and automated routing built precisely for global operations.',
     features: ['Real-time fleet tracking', 'Predictive demand forecasting', 'Warehouse management systems', 'Supplier portal integration'],
+    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1400&q=80',
+    imageAlt: 'Logistics containers and global supply chain transport',
     reverse: false,
     cta: 'Optimize Supply Chain',
     to: '#'
@@ -57,6 +67,8 @@ const solutions = [
     title: 'Modernize Human Resources',
     desc: 'Automate tedious HR tasks from recruitment and onboarding to payroll and performance reviews. Build an engaged workforce using smart, intuitive HR software.',
     features: ['Applicant Tracking Systems (ATS)', 'Employee self-service portals', 'Automated payroll & tax engines', 'Performance & goal tracking'],
+    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1400&q=80',
+    imageAlt: 'HR team reviewing candidate and workforce data',
     reverse: true,
     cta: 'Discover HRTech',
     to: '#'
@@ -90,14 +102,18 @@ export default function IndustrySolutions() {
             </div>
 
             {/* Visual Graphic Segment */}
-            <div className="flex-1 w-full flex items-center justify-center bg-gray-50 dark:bg-[#1e293b] rounded-[24px] overflow-hidden min-h-[400px] border border-gray-100 dark:border-slate-800 shadow-sm">
-              <div className="text-center px-10">
-                {/* Decorative block standing in for dynamic visual */}
-                <div className="w-24 h-24 bg-gradient-to-br from-orange-400 to-rose-500 rounded-2xl mx-auto mb-6 shadow-xl shadow-orange-500/20 transform rotate-3 flex items-center justify-center">
-                  <span className="text-white font-extrabold text-[24px] uppercase tracking-tighter opacity-90">{row.id.substring(0, 2)}</span>
-                </div>
-                <h3 className="text-[20px] font-bold text-gray-900 dark:text-slate-100">{row.label.split('&')[0]}</h3>
-                <div className="w-16 h-1 bg-orange-500/50 mx-auto mt-4 rounded-full"></div>
+            <div className="flex-1 w-full bg-gray-50 dark:bg-[#1e293b] rounded-[24px] overflow-hidden min-h-[400px] border border-gray-100 dark:border-slate-800 shadow-sm relative group">
+              <img
+                src={row.image}
+                alt={row.imageAlt}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-950/75 via-gray-900/30 to-gray-900/20" />
+              <div className="absolute bottom-6 left-6 right-6">
+                <p className="inline-flex rounded-full bg-orange-500/90 px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-white">
+                  {row.label}
+                </p>
               </div>
             </div>
           </div>

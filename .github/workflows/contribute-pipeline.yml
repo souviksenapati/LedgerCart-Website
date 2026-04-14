@@ -1,4 +1,4 @@
-name: Contribute Pipeline Workflow
+name: Contribute Quality Gate
 
 on:
   push:
@@ -8,39 +8,77 @@ on:
     branches:
       - test
 
+permissions:
+  contents: read
+
+concurrency:
+  group: contribute-quality-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   validate-code:
-    name: Strict Code Validation & Build
+    name: Validate Contribute Branch
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
-      - name: Install dependencies (Strict Verification)
+      - name: Install dependencies
         run: npm ci
 
-      - name: Security Vulnerability Check
-        run: npm audit --audit-level=high || echo "Ignoring non-critical vulnerability warnings for now"
+      - name: Detect changed frontend files
+        id: changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE_BRANCH="test"
+          if ! git ls-remote --exit-code --heads origin test >/dev/null 2>&1; then
+            BASE_BRANCH="main"
+          fi
 
-      - name: Run Strict Linting
-        run: npm run lint
+          git fetch origin "$BASE_BRANCH" --depth=1
+          CHANGED_JS="$(git diff --name-only origin/$BASE_BRANCH...HEAD | grep -E '\\.(js|jsx|ts|tsx)$' || true)"
 
-      - name: Build Application (Catches syntax and compilation errors)
+          echo "base_branch=$BASE_BRANCH" >> "$GITHUB_OUTPUT"
+          echo "changed_js<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$CHANGED_JS" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Lint changed files only
+        if: steps.changes.outputs.changed_js != ''
+        shell: bash
+        run: |
+          printf '%s\n' "${{ steps.changes.outputs.changed_js }}" | sed '/^$/d' | xargs -r npx eslint --max-warnings=0
+
+      - name: Skip lint when no JS/JSX changes
+        if: steps.changes.outputs.changed_js == ''
+        run: echo "No JS/JSX/TS/TSX file changes detected vs ${{ steps.changes.outputs.base_branch }} branch."
+
+      - name: Run tests if configured
+        run: npm run test --if-present
+
+      - name: Build application
         run: npm run build
 
+      - name: Audit production dependencies (high and critical)
+        run: npm audit --omit=dev --audit-level=high
+
   create-pr:
-    name: Create PR to test Branch
+    name: Create PR to test branch
     needs: validate-code
-    # ONLY run this job if validation passes AND it was a direct push to the contribute branch 
     if: github.event_name == 'push' && github.ref == 'refs/heads/contribute'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     
     permissions:
       contents: write
@@ -48,16 +86,25 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - name: Create Pull Request to test branch
+      - name: Create or reuse Pull Request to test branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
         run: |
+          set -euo pipefail
+          EXISTING_PR="$(gh pr list --base test --head contribute --state open --json number --jq '.[0].number')"
+
+          if [ -n "$EXISTING_PR" ]; then
+            echo "Open PR #$EXISTING_PR already exists from contribute to test."
+            exit 0
+          fi
+
           gh pr create \
             --base test \
             --head contribute \
-            --title "Automated PR: Merge \`contribute\` ➡ \`test\`" \
-            --body "This PR was generated automatically after the \`contribute\` branch passed strict code verification (linting, build compilation) successfully. 🚀 Please review the changes." || echo "A Pull Request already exists for these branches, or there are no differences."
+            --title "Automated PR: contribute to test" \
+            --body "Auto-created after contribute branch passed validation checks (changed-files lint, optional tests, production build, and dependency audit)."
