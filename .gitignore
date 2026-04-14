@@ -153,3 +153,5 @@ index.html.gz
 # Project specific
 build_error.txt
 .netlify
+playwright-report/
+test-results/
