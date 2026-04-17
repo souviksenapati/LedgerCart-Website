@@ -1,0 +1,194 @@
+name: Contribute Post-PR Check
+
+on:
+  push:
+    branches:
+      - contribute
+
+permissions:
+  contents: read
+
+concurrency:
+  group: contribute-post-pr-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-code:
+    name: Contribute Post-PR Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check for unresolved merge markers
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git grep -nE '^(<<<<<<<|=======|>>>>>>>)' -- . ':!package-lock.json'; then
+            echo "Unresolved merge markers detected."
+            exit 1
+          fi
+
+      - name: Detect changed frontend files
+        id: changes
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BASE_BRANCH="test"
+          if ! git ls-remote --exit-code --heads origin test >/dev/null 2>&1; then
+            BASE_BRANCH="main"
+          fi
+
+          git fetch origin "$BASE_BRANCH" --depth=1
+          CHANGED_JS="$(git diff --name-only origin/$BASE_BRANCH...HEAD | grep -E '\\.(js|jsx|ts|tsx)$' || true)"
+
+          echo "base_branch=$BASE_BRANCH" >> "$GITHUB_OUTPUT"
+          echo "changed_js<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$CHANGED_JS" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Lint changed files only
+        if: steps.changes.outputs.changed_js != ''
+        shell: bash
+        run: |
+          printf '%s\n' "${{ steps.changes.outputs.changed_js }}" | sed '/^$/d' | xargs -r npx eslint --max-warnings=0
+
+      - name: Skip lint when no JS/JSX changes
+        if: steps.changes.outputs.changed_js == ''
+        run: echo "No JS/JSX/TS/TSX file changes detected vs ${{ steps.changes.outputs.base_branch }} branch."
+
+      - name: Run tests if configured
+        run: npm run test --if-present
+
+      - name: Build application
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          export VITE_SUPABASE_URL="${VITE_SUPABASE_URL:-https://placeholder.supabase.co}"
+          export VITE_SUPABASE_ANON_KEY="${VITE_SUPABASE_ANON_KEY:-placeholder-anon-key}"
+          npm run build
+
+      - name: Smoke test built app
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -f dist/index.html
+          test -d dist/assets
+          ls dist/assets/*.js >/dev/null 2>&1
+          ls dist/assets/*.css >/dev/null 2>&1
+
+          if grep -R "%VITE_" dist >/dev/null 2>&1; then
+            echo "Unresolved Vite env placeholders found in dist output."
+            exit 1
+          fi
+
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/vite-preview.log 2>&1 &
+          PREVIEW_PID=$!
+
+          cleanup() {
+            kill "$PREVIEW_PID" >/dev/null 2>&1 || true
+          }
+          trap cleanup EXIT
+
+          for i in {1..25}; do
+            if curl -fsS http://127.0.0.1:4173 >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+
+          check_route() {
+            local route="$1"
+            local response
+            response="$(curl -fsS "http://127.0.0.1:4173$route")"
+            echo "$response" | grep -q 'id="root"'
+            echo "$response" | grep -qi 'ledgercart'
+          }
+
+          check_route "/"
+          check_route "/pricing"
+          check_route "/service"
+          check_route "/solution"
+          check_route "/contact"
+          check_route "/product"
+          check_route "/careers"
+          check_route "/about"
+          check_route "/partners"
+          check_route "/blog"
+          check_route "/case-studies"
+          check_route "/legal/privacy"
+          check_route "/legal/terms"
+          check_route "/legal/cookies"
+          check_route "/legal/security"
+
+      - name: Install Playwright browser (Chromium)
+        run: npx playwright install --with-deps chromium
+
+      - name: Run critical feature tests (E2E)
+        run: npm run test:e2e
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report
+            test-results
+          if-no-files-found: ignore
+
+      - name: Audit production dependencies (high and critical)
+        run: npm audit --omit=dev --audit-level=high
+
+  create-pr:
+    name: Create PR to test branch
+    needs: validate-code
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Create or reuse Pull Request to test branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          EXISTING_PR="$(gh pr list --base test --head contribute --state open --json number --jq '.[0].number')"
+
+          if [ -n "$EXISTING_PR" ]; then
+            echo "Open PR #$EXISTING_PR already exists from contribute to test."
+            exit 0
+          fi
+
+          gh pr create \
+            --base test \
+            --head contribute \
+            --title "Automated PR: contribute to test" \
+            --body "Auto-created after contribute branch passed validation checks (changed-files lint, optional tests, production build, and dependency audit)."
