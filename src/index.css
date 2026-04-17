@@ -7,6 +7,105 @@
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+
+  :root {
+    /* Home hero (inline-styled) theme tokens */
+    /* White center with a soft gray fade to edges (Merge-like) */
+    --homehero-bg: radial-gradient(circle at 50% 22%, #ffffff 0%, #ffffff 55%, #f3f2ef 100%);
+    --homehero-text: #1A1817;
+    --homehero-muted: #6B6860;
+
+    /* Center wash that fades the texture behind the badge/headline */
+    --homehero-glow: radial-gradient(circle at 50% 20%, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.92) 38%, rgba(255,255,255,0) 72%);
+
+    /* Bottom fade to blend into the next (plain) section */
+    --homehero-bottom-fade: linear-gradient(
+      to bottom,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.65) 55%,
+      rgba(255,255,255,1) 100%
+    );
+
+    /* Merge-like subtle background texture (concentric rings) */
+    --homehero-texture:
+      /* Center wash to “fade out” rings behind the badge/headline */
+      radial-gradient(circle at 50% 18%, rgba(255,255,255,1) 0%, rgba(255,255,255,0.96) 34%, rgba(255,255,255,0.72) 54%, rgba(255,255,255,0) 74%),
+      /* Soft highlight */
+      radial-gradient(circle at 50% 18%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0) 64%),
+      /* Elliptical rings (more visible) */
+      repeating-radial-gradient(ellipse at 50% -16%, rgba(17,24,39,0.08) 0 2px, rgba(17,24,39,0) 2px 90px);
+
+    --homehero-badge-bg: linear-gradient(180deg, rgba(255,255,255,0.86) 0%, rgba(255,255,255,0.55) 100%);
+    --homehero-badge-border: rgba(44,44,44,0.12);
+
+    --homehero-chip-bg: rgba(255,255,255,0.78);
+    --homehero-chip-border: rgba(44,44,44,0.11);
+
+    --homehero-primary-bg: #1A1817;
+    --homehero-primary-text: #FFFFFF;
+    --homehero-primary-icon: rgba(255,255,255,0.8);
+
+    --homehero-secondary-bg: rgba(255,255,255,0.7);
+    --homehero-secondary-hover-bg: rgba(255,255,255,0.92);
+    --homehero-secondary-border: rgba(44,44,44,0.15);
+    --homehero-secondary-text: #1A1817;
+    --homehero-secondary-icon: #6B6860;
+
+    --homehero-box-bg: #FFFFFF;
+    --homehero-box-border: #E0DDD8;
+    --homehero-line: #C6C3BD;
+    --homehero-hub-fill: #ECEAE8;
+    --homehero-hub-text: #1A1817;
+    --homehero-hub-ring: rgba(0,0,0,0.04);
+    --homehero-label: #2C2C2C;
+    --homehero-dot: #f97316;
+  }
+
+  .dark {
+    --homehero-bg: radial-gradient(circle at 50% 22%, #0b1220 0%, #0a0f1a 55%, #050814 100%);
+    --homehero-text: #f1f5f9;
+    --homehero-muted: #cbd5e1;
+
+    --homehero-glow: radial-gradient(circle at 50% 20%, rgba(17,24,39,0.92) 0%, rgba(17,24,39,0.70) 36%, rgba(17,24,39,0) 72%);
+
+    --homehero-bottom-fade: linear-gradient(
+      to bottom,
+      rgba(10,15,26,0) 0%,
+      rgba(10,15,26,0.65) 55%,
+      rgba(10,15,26,1) 100%
+    );
+
+    --homehero-texture:
+      radial-gradient(circle at 50% 18%, rgba(10,15,26,1) 0%, rgba(10,15,26,0.92) 36%, rgba(10,15,26,0.55) 56%, rgba(10,15,26,0) 76%),
+      radial-gradient(circle at 50% 12%, rgba(234,88,12,0.16) 0%, rgba(234,88,12,0) 58%),
+      repeating-radial-gradient(ellipse at 50% -16%, rgba(148,163,184,0.18) 0 2px, rgba(148,163,184,0) 2px 96px);
+
+    --homehero-badge-bg: linear-gradient(180deg, rgba(17,24,39,0.62) 0%, rgba(15,23,42,0.38) 100%);
+    --homehero-badge-border: rgba(148,163,184,0.18);
+
+    --homehero-chip-bg: rgba(15,23,42,0.55);
+    --homehero-chip-border: rgba(148,163,184,0.18);
+
+    --homehero-primary-bg: #f1f5f9;
+    --homehero-primary-text: #0a0f1a;
+    --homehero-primary-icon: rgba(10,15,26,0.72);
+
+    --homehero-secondary-bg: rgba(15,23,42,0.4);
+    --homehero-secondary-hover-bg: rgba(15,23,42,0.6);
+    --homehero-secondary-border: rgba(148,163,184,0.22);
+    --homehero-secondary-text: #f1f5f9;
+    --homehero-secondary-icon: rgba(241,245,249,0.78);
+
+    --homehero-box-bg: rgba(255,255,255,0.92);
+    --homehero-box-border: rgba(15,23,42,0.14);
+    --homehero-line: rgba(148,163,184,0.35);
+    --homehero-hub-fill: #111827;
+    --homehero-hub-text: #f1f5f9;
+    --homehero-hub-ring: rgba(255,255,255,0.06);
+    --homehero-label: #e2e8f0;
+    --homehero-dot: #f97316;
+  }
+
   body {
     background-color: white;
     color: #111827; /* gray-900 */

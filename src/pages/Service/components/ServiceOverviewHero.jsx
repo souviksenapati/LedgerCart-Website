@@ -1,6 +1,6 @@
 export default function ServiceOverviewHero() {
   return (
-    <section className="relative pt-[100px] pb-[60px] bg-gradient-to-b from-[#f8f9fb] to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 text-center border-b border-gray-100 dark:border-slate-800 transition-colors duration-300">
+    <section className="relative pt-6 pb-[80px] bg-gradient-to-b from-[#f8f9fb] to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 text-center border-b border-gray-100 dark:border-slate-800 transition-colors duration-300">
       <div className="max-w-[1280px] mx-auto px-6">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-900/40 text-orange-600 text-[13px] font-bold uppercase tracking-wider mb-6 shadow-sm">
           <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>

@@ -18,14 +18,15 @@ import { Link } from 'react-router-dom'
 ══════════════════════════════════════════════════════════════════ */
 
 /* ─── DESIGN TOKENS ─────────────────────────────────────────────── */
-const BG       = '#EEECEA'
-const BOX_BG   = '#FFFFFF'
-const BOX_BD   = '#E0DDD8'
-const LINE_CLR = '#C6C3BD'
-const HUB_FILL = '#ECEAE8'
-const LBL_CLR  = '#2C2C2C'
-const DOT_CLR  = '#f97316'
-const HUB_TXT  = '#1A1817'
+const BG       = 'var(--homehero-bg)'
+const BOX_BG   = 'var(--homehero-box-bg)'
+const BOX_BD   = 'var(--homehero-box-border)'
+const LINE_CLR = 'var(--homehero-line)'
+const HUB_FILL = 'var(--homehero-hub-fill)'
+const LBL_CLR  = 'var(--homehero-label)'
+const DOT_CLR  = 'var(--homehero-dot)'
+const HUB_TXT  = 'var(--homehero-hub-text)'
+const HUB_RING = 'var(--homehero-hub-ring)'
 
 /* ─── COMPANY LOGO ICONS — precise monochrome SVGs ──────────────
    Style guide:
@@ -482,7 +483,7 @@ const FlowSVG = () => (
       rx={HUB_RX - 1}
       ry={HUB_RY - 1}
       fill="none"
-      stroke="rgba(0,0,0,0.04)"
+      stroke={HUB_RING}
       strokeWidth="4"
     />
 
@@ -529,7 +530,7 @@ const IntegrationRows = () => (
     width: LABEL_END,
     height: TOTAL_H,
   }}>
-    {ROWS.map((row, i) => (
+    {ROWS.map((row) => (
       <div
         key={row.label}
         style={{
@@ -741,14 +742,31 @@ export default function Hero() {
       position: 'relative',
       overflow: 'hidden',
     }}>
-      {/* Very subtle radial glow at center-top */}
+      {/* Subtle Merge-like texture (rings) */}
       <div style={{
         position: 'absolute',
-        top: 0, left: '50%',
-        transform: 'translateX(-50%)',
-        width: 800,
-        height: 400,
-        background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.45) 0%, transparent 70%)',
+        inset: 0,
+        backgroundImage: 'var(--homehero-texture)',
+        opacity: 0.72,
+        pointerEvents: 'none',
+      }}/>
+
+      {/* Center fade wash (fades rings behind badge/headline) */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'var(--homehero-glow)',
+        pointerEvents: 'none',
+      }}/>
+
+      {/* Bottom fade into next section (removes hard cut) */}
+      <div style={{
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        height: 220,
+        background: 'var(--homehero-bottom-fade)',
         pointerEvents: 'none',
       }}/>
 
@@ -769,8 +787,8 @@ export default function Hero() {
             gap: 7,
             padding: '5px 14px',
             borderRadius: 100,
-            background: 'rgba(255,255,255,0.65)',
-            border: '1px solid rgba(44,44,44,0.12)',
+            background: 'var(--homehero-badge-bg)',
+            border: '1px solid var(--homehero-badge-border)',
             fontSize: 11,
             fontWeight: 700,
             color: '#ea580c',
@@ -792,7 +810,7 @@ export default function Hero() {
             fontWeight: 280,
             letterSpacing: '-0.04em',
             lineHeight: 1.06,
-            color: '#1A1817',
+            color: 'var(--homehero-text)',
             margin: '0 0 22px',
             fontFamily: 'inherit',
           }}>
@@ -813,7 +831,7 @@ export default function Hero() {
           {/* Subtitle */}
           <p style={{
             fontSize: 17,
-            color: '#6B6860',
+            color: 'var(--homehero-muted)',
             lineHeight: 1.7,
             maxWidth: 480,
             margin: '0 auto 38px',
@@ -822,8 +840,8 @@ export default function Hero() {
             <span style={{
               display: 'inline-flex',
               padding: '2px 9px',
-              background: 'rgba(255,255,255,0.78)',
-              border: '1px solid rgba(44,44,44,0.11)',
+              background: 'var(--homehero-chip-bg)',
+              border: '1px solid var(--homehero-chip-border)',
               borderRadius: 5,
               color: '#ea580c',
               fontWeight: 600,
@@ -848,8 +866,8 @@ export default function Hero() {
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 padding: '13px 28px',
-                background: '#1A1817',
-                color: '#FFFFFF',
+                background: 'var(--homehero-primary-bg)',
+                color: 'var(--homehero-primary-text)',
                 fontSize: 15,
                 fontWeight: 500,
                 borderRadius: 100,
@@ -862,7 +880,7 @@ export default function Hero() {
             >
               Contact Us
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 7h10M8 3l4 4-4 4" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2 7h10M8 3l4 4-4 4" stroke="var(--homehero-primary-icon)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </Link>
 
@@ -872,23 +890,23 @@ export default function Hero() {
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 padding: '12px 28px',
-                background: 'rgba(255,255,255,0.7)',
-                color: '#1A1817',
+                background: 'var(--homehero-secondary-bg)',
+                color: 'var(--homehero-secondary-text)',
                 fontSize: 15,
                 fontWeight: 500,
                 borderRadius: 100,
                 textDecoration: 'none',
                 letterSpacing: '-0.012em',
-                border: '1px solid rgba(44,44,44,0.15)',
+                border: '1px solid var(--homehero-secondary-border)',
                 transition: 'background 0.15s ease, transform 0.15s ease',
                 backdropFilter: 'blur(6px)',
               }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.92)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.7)'; e.currentTarget.style.transform = 'translateY(0)' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--homehero-secondary-hover-bg)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'var(--homehero-secondary-bg)'; e.currentTarget.style.transform = 'translateY(0)' }}
             >
               Get Pricing Quote
               <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                <path d="M2.5 10.5L10.5 2.5M10.5 2.5H5M10.5 2.5v5.5" stroke="#6B6860" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2.5 10.5L10.5 2.5M10.5 2.5H5M10.5 2.5v5.5" stroke="var(--homehero-secondary-icon)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </Link>
           </div>

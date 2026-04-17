@@ -132,7 +132,7 @@ export default function CareerApplicationForm() {
 
       // Step 2: Upload CV if provided
       if (resume) {
-        const { url, name } = await uploadCV(resume, docId)
+        const { url, name: _name } = await uploadCV(resume, docId)
         await supabase.from('applications').update({
           cv_url: url,
           // cv_file_name if we added it to schema, omitting for now

@@ -9,8 +9,12 @@ export function useCachedFetch(table, selectQuery = '*', orderBy = null, filterE
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  // Stable dependency keys (avoid object reference traps in deps)
+  const orderByKey = orderBy ? JSON.stringify(orderBy) : ''
+  const filterEqKey = filterEq ? JSON.stringify(filterEq) : ''
+
   // Create a unique deterministic signature for this specific query
-  const cacheKey = JSON.stringify({ table, selectQuery, orderBy, filterEq })
+  const cacheKey = JSON.stringify({ table, selectQuery, orderBy: orderByKey, filterEq: filterEqKey })
 
   useEffect(() => {
     let isMounted = true
@@ -26,13 +30,16 @@ export function useCachedFetch(table, selectQuery = '*', orderBy = null, filterE
 
       // 2. Secretly fetch fresh data from database
       try {
+        const resolvedOrderBy = orderByKey ? JSON.parse(orderByKey) : null
+        const resolvedFilterEq = filterEqKey ? JSON.parse(filterEqKey) : null
+
         let query = supabase.from(table).select(selectQuery)
         
-        if (orderBy) {
-          query = query.order(orderBy.column, { ascending: orderBy.ascending })
+        if (resolvedOrderBy) {
+          query = query.order(resolvedOrderBy.column, { ascending: resolvedOrderBy.ascending })
         }
-        if (filterEq) {
-           query = query.eq(filterEq.column, filterEq.value)
+        if (resolvedFilterEq) {
+           query = query.eq(resolvedFilterEq.column, resolvedFilterEq.value)
         }
 
         const { data: remoteData, error: remoteError } = await query
@@ -65,7 +72,7 @@ export function useCachedFetch(table, selectQuery = '*', orderBy = null, filterE
     return () => {
       isMounted = false
     }
-  }, [cacheKey, table, selectQuery]) 
+  }, [cacheKey, table, selectQuery, orderByKey, filterEqKey]) 
   // We stringify the key to avoid object reference traps in dependencies
 
   return { data, loading, error, setData } // Expose setData for optimistic updates

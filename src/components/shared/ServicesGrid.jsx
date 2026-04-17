@@ -39,7 +39,7 @@ const services = [
 
 export default function ServicesGrid() {
   return (
-    <section className="py-[100px] bg-white dark:bg-slate-950 transition-colors duration-300">
+    <section className="py-[100px] bg-white dark:bg-[#0a0f1a] transition-colors duration-300">
       <div className="max-w-[1280px] mx-auto px-6">
         <p className="text-xs font-bold tracking-[0.12em] uppercase text-orange-600 text-center mb-4">OUR EXPERTISE</p>
         <h2 className="text-[clamp(32px,4vw,52px)] font-extrabold tracking-[-1px] leading-[1.1] text-gray-900 dark:text-slate-100 text-center mb-5">IT Services & Solutions</h2>

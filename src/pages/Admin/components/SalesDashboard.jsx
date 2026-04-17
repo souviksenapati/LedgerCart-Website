@@ -153,7 +153,7 @@ function EnquiryRow({ enq, onUpdate }) {
 }
 
 export default function SalesDashboard() {
-  const { userName, logout } = useAuth()
+  const { userName: _userName, logout: _logout } = useAuth()
   const [enquiries, setEnquiries] = useState([])
   const [loading, setLoading]     = useState(true)
   const [search, setSearch]       = useState('')
@@ -165,6 +165,7 @@ export default function SalesDashboard() {
     const fetchEnquiries = async () => {
       try {
         const { data, error } = await supabase.from('enquiries').select('*').order('submitted_at', { ascending: false }).limit(200)
+        if (error) console.error(error)
         if (data) setEnquiries(data)
       } catch (err) { 
         console.error(err) 

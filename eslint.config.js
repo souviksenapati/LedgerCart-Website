@@ -24,6 +24,23 @@ export default defineConfig([
     },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'react-refresh/only-export-components': [
+        'error',
+        { allowConstantExport: true, allowExportNames: ['useTheme', 'useAuth'] },
+      ],
+    },
+  },
+  {
+    files: [
+      'eslint.config.js',
+      'vite.config.js',
+      'postcss.config.js',
+      'tailwind.config.js',
+      'playwright.config.js',
+      '**/*.config.js',
+    ],
+    languageOptions: {
+      globals: globals.node,
     },
   },
 ])
