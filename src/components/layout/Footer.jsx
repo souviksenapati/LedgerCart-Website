@@ -167,7 +167,7 @@ function Footer() {
         {/* Bottom Bar */}
         <div className="py-5 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-500 dark:text-slate-400">Theme :</span>
+            <span className="text-sm text-gray-500 dark:text-slate-400">Theme:</span>
             {themes.map((t) => (
               <button
                 key={t.id}
