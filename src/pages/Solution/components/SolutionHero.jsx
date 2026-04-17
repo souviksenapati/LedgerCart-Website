@@ -1,6 +1,6 @@
 export default function SolutionHero() {
   return (
-    <section className="relative pt-[100px] pb-[60px] bg-gradient-to-b from-[#fdfaf6] to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 border-b border-gray-100 dark:border-slate-800 overflow-hidden transition-colors duration-300">
+    <section className="relative pt-6 pb-[80px] bg-gradient-to-b from-[#fdfaf6] to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 border-b border-gray-100 dark:border-slate-800 overflow-hidden transition-colors duration-300">
       <div className="absolute inset-0 z-0 select-none">
         <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] bg-orange-500/10 dark:bg-orange-500/5 blur-[120px] rounded-full"></div>
         <div className="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] bg-blue-500/10 dark:bg-blue-500/5 blur-[150px] rounded-full"></div>

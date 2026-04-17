@@ -2,7 +2,7 @@ const logos = ['LedgerCart Client One', 'LedgerCart Client Two', 'LedgerCart Cli
 
 export default function LogosStrip() {
   return (
-    <section className="py-[60px] bg-white dark:bg-slate-950 border-t border-gray-200 dark:border-slate-800 transition-colors duration-300">
+    <section className="py-[60px] bg-white dark:bg-[#0a0f1a] transition-colors duration-300">
       <div className="max-w-[1280px] mx-auto px-6">
         <p className="text-center text-gray-500 dark:text-slate-400 text-[15px] max-w-[720px] mx-auto mb-10 leading-[1.7]">
           Businesses trust LedgerCart to eliminate operational bottlenecks and streamline growth. By replacing disjointed software with our unified ERP and Managed IT Services, we've helped companies like{' '}

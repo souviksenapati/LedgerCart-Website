@@ -1,18 +1,3 @@
-const features = [
-  { name: 'Auto-scaling', desc: 'Automatically scale your apps up or down based on traffic with zero manual intervention.' },
-  { name: 'Fair use policy', desc: 'Transparent pricing with no hidden fees. Only pay for what you use.' },
-  { name: 'Vertical scaling', desc: 'Increase resources for your app instances with a single slider adjustment.' },
-  { name: 'CI/CD pipelines', desc: 'Auto-deploy on every git push. Connect GitHub, GitLab, or Bitbucket.' },
-  { name: 'Zero downtime deployments', desc: 'Deploy updates without taking your application offline for even a moment.' },
-  { name: 'Built-in DDoS protection', desc: "Cloudflare's enterprise-grade protection keeps your apps safe from attacks." },
-]
-
-const fcards = [
-  { icon: '🚀', title: 'Deployed in 30 seconds', sub: 'cart-service → production', badgeClass: 'bg-green-50 text-green-600 border border-green-200', badge: '✓ Live', delay: 'animation-slideInRight1' },
-  { icon: '📈', title: 'Auto-scaled to 3 instances', sub: 'Traffic spike detected', badgeClass: 'bg-blue-50 text-blue-600 border border-blue-200', badge: '↑ Scaled', delay: 'animation-slideInRight2' },
-  { icon: '🛡️', title: 'DDoS attack blocked', sub: '12,400 requests blocked', badgeClass: 'bg-amber-50 text-amber-600 border border-amber-200', badge: '⚡ Protected', delay: 'animation-slideInRight3' },
-]
-
 export default function FeaturesSection() {
   return (
     <section className="py-24 bg-white dark:bg-[#0a0f1a] font-sans transition-colors duration-300">
@@ -20,7 +5,7 @@ export default function FeaturesSection() {
         
         {/* ROW 1: Custom IT Services */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div className="flex flex-col items-start pr-12">
+          <div className="flex flex-col items-start md:pr-12">
             <div className="inline-block border border-orange-200 dark:border-orange-900/40 bg-orange-50 dark:bg-orange-950/20 text-orange-600 px-2 py-0.5 rounded-[4px] text-[10px] font-bold tracking-widest uppercase mb-6">
               TAILORED SOLUTIONS
             </div>
@@ -100,7 +85,7 @@ export default function FeaturesSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           
           {/* Graphic Left */}
-          <div className="flex flex-col gap-3.5 pr-12 relative items-center md:items-start pl-0 md:pl-16">
+          <div className="flex flex-col gap-3.5 md:pr-12 relative items-center md:items-start pl-0 md:pl-16">
             <div className="absolute top-0 bottom-0 left-12 w-px bg-gradient-to-b from-transparent via-gray-200 dark:via-slate-800 to-transparent hidden md:block"></div>
             
             {["24/7 Cybersecurity Monitoring", "Compliance and IT audits", "Network infrastructure setup", "Cloud migration strategies", "Disaster recovery planning"].map((text, idx) => (
@@ -114,7 +99,7 @@ export default function FeaturesSection() {
           </div>
 
           {/* Text Right */}
-          <div className="flex flex-col items-center text-center pl-12">
+          <div className="flex flex-col items-center text-center md:pl-12">
             <div className="inline-block border border-orange-200 dark:border-orange-900/40 bg-orange-50 dark:bg-orange-950/20 text-orange-600 px-2 py-0.5 rounded-[4px] text-[10px] font-bold tracking-widest uppercase mb-6">
               MANAGED IT
             </div>

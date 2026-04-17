@@ -3,7 +3,7 @@ import { supabase } from '../../../lib/supabase'
 import { useAuth } from '../../../context/AuthContext'
 
 export default function HRJobManagement() {
-  const { role, userName } = useAuth()
+  const { role: _role, userName: _userName } = useAuth()
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)

@@ -39,19 +39,6 @@ const PulseDot = ({ left, top }) => (
   </div>
 )
 
-const stats = [
-  {
-    dotClass: 'bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.5)]',
-    number: 'Global IT Support',
-    desc: 'Get dedicated 24/7 IT support and remote administration for your business, no matter where you are located. We serve clients across the globe.',
-  },
-  {
-    dotClass: 'bg-orange-600 shadow-[0_0_8px_rgba(234,88,12,0.5)]',
-    number: 'Worldwide ERP Deployment',
-    desc: 'Deploy the powerful LedgerCart ERP architecture securely and reliably, backed by our global network of infrastructure partners.',
-  },
-]
-
 export default function GlobeSection() {
   const { paths, projectedDots } = useMemo(() => {
     // Create base projection
@@ -88,7 +75,7 @@ export default function GlobeSection() {
 
   return (
     <section className="py-24 bg-white dark:bg-[#0a0f1a] relative overflow-hidden transition-colors duration-300">
-      <div className="max-w-[1280px] mx-auto px-6">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
         
         {/* Dark Card Container */}
         <div className="bg-[#0b0f19] dark:bg-slate-900/40 rounded-[32px] md:rounded-[40px] shadow-2xl border border-transparent dark:border-slate-800/60 overflow-hidden relative pt-[72px] pb-[60px] px-6 md:px-12">

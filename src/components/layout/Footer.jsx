@@ -30,7 +30,7 @@ function Footer() {
 
   return (
     <footer className="bg-white dark:bg-[#0a0f1a] border-t border-gray-200 dark:border-slate-800 transition-colors duration-300 pt-16">
-      <div className="max-w-[1280px] mx-auto px-6">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-[60px] pb-[60px] border-b border-gray-200 dark:border-slate-800">
           {/* Brand */}
           <div>
