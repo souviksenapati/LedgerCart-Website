@@ -1,5 +1,4 @@
-name: Contribute Branch | PR Pre-Safety Gate
-run-name: Contribute PR Gate | base:${{ github.base_ref }} | head:${{ github.head_ref }}
+name: Contribute Pre-PR Check
 
 on:
   pull_request:
@@ -11,12 +10,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: contribute-pr-gate-${{ github.event.pull_request.number }}
+  group: contribute-pre-pr-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   validate-code:
-    name: Contribute PR | Pre-Safety Validation (Required)
+    name: Contribute Pre-PR Check
     runs-on: ubuntu-latest
     timeout-minutes: 15
     
@@ -49,6 +48,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
           BASE_BRANCH="${{ github.base_ref }}"
 
           git fetch origin "$BASE_BRANCH" --depth=1
