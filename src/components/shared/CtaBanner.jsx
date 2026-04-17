@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom'
 
 export default function CtaBanner() {
   return (
-    <section className="py-[80px] bg-white dark:bg-slate-950 transition-colors duration-300">
-      <div className="max-w-[1024px] mx-auto px-6">
-        <div className="relative bg-[#1a1f36] dark:bg-slate-900 rounded-3xl px-10 py-[60px] text-center overflow-hidden shadow-2xl border border-transparent dark:border-slate-800/80">
+    <section className="py-[80px] bg-white dark:bg-[#0a0f1a] transition-colors duration-300">
+      <div className="max-w-[1024px] mx-auto px-4 sm:px-6">
+        <div className="relative bg-[#1a1f36] dark:bg-slate-900 rounded-3xl px-6 sm:px-10 py-[60px] text-center overflow-hidden shadow-2xl border border-transparent dark:border-slate-800/80">
           <div className="absolute top-[-80px] left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, rgba(234,88,12,0.15) 0%, transparent 70%)' }}></div>
           <h2 className="relative text-[clamp(32px,4vw,48px)] font-black tracking-[-1.5px] text-white mb-4">Ready to transform your business?</h2>
           <p className="relative text-[16px] text-white/70 max-w-[480px] mx-auto mb-8 font-medium">

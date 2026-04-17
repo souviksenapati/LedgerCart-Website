@@ -5,6 +5,7 @@ import Navbar from '../../components/layout/Navbar'
 import Footer from '../../components/layout/Footer'
 import { supabase } from '../../lib/supabase'
 import DOMPurify from 'dompurify'
+import { applySeo } from '../../lib/seo'
 
 export default function BlogPostDetail() {
   const { slug } = useParams()
@@ -13,27 +14,36 @@ export default function BlogPostDetail() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
+    const fetchPost = async () => {
+      setLoading(true)
+      try {
+        const { data, error } = await supabase
+          .from('blogs')
+          .select('*')
+          .eq('slug', slug)
+          .single()
+
+        if (data && !error) {
+          setPost(data)
+
+          const origin = window.location.origin
+          applySeo({
+            title: `${data.title} | LedgerCart Blog`,
+            description: data.excerpt || 'Read the latest insights from LedgerCart on engineering, ERP, and secure software delivery.',
+            canonicalUrl: `${origin}/blog/${data.slug}`,
+            robots: 'index, follow',
+            ogType: 'article',
+            imageUrl: data.image_url || `${origin}/og-image.png`,
+          })
+        }
+      } catch (err) {
+        console.error('Error fetching post:', err)
+      }
+      setLoading(false)
+    }
+
     fetchPost()
   }, [slug])
-
-  const fetchPost = async () => {
-    setLoading(true)
-    try {
-      const { data, error } = await supabase
-        .from('blogs')
-        .select('*')
-        .eq('slug', slug)
-        .single()
-        
-      if (data && !error) {
-        setPost(data)
-        document.title = `${data.title} | LedgerCart Blog`
-      }
-    } catch (err) {
-      console.error('Error fetching post:', err)
-    }
-    setLoading(false)
-  }
 
   if (loading) {
     return (

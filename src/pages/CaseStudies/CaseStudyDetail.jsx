@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import AnnouncementBar from '../../components/layout/AnnouncementBar'
 import Navbar from '../../components/layout/Navbar'
 import Footer from '../../components/layout/Footer'
+import { applySeo } from '../../lib/seo'
 
 const CASE_STUDIES = [
   {
@@ -27,17 +28,66 @@ const CASE_STUDIES = [
     `,
     industry: 'Logistics',
   },
-  // ... other studies
+  {
+    id: 2,
+    slug: 'healthprime-telehealth',
+    client: 'HealthPrime Wellness',
+    title: 'Secure Patient Portals: Digital Transformation for Urban Clinics',
+    content: `
+      <h2>The Challenge</h2>
+      <p>HealthPrime Wellness needed to modernize patient access while operating across departments with legacy systems that couldn’t reliably share data.</p>
+      <h2>Our Strategic Deployment</h2>
+      <p>We delivered a secure patient portal designed for healthcare workflows, with streamlined access patterns and a focus on privacy, auditability, and performance.</p>
+      <h2>The Metrics of Success</h2>
+      <ul>
+        <li><strong>99.9% accessibility</strong> for patient data and key records.</li>
+        <li><strong>Under 3 seconds</strong> to access records end-to-end.</li>
+        <li><strong>30% increase</strong> in outpatient throughput.</li>
+      </ul>
+      <h2>Conclusion</h2>
+      <p>HealthPrime now operates with a modern, secure patient experience and a foundation that supports future digital transformation initiatives.</p>
+    `,
+    industry: 'Healthcare',
+  },
 ]
 
 export default function CaseStudyDetail() {
   const { slug } = useParams()
-  const study = CASE_STUDIES.find(p => p.slug === slug) || CASE_STUDIES[0] // Fallback for demo
+  const study = CASE_STUDIES.find(p => p.slug === slug)
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    document.title = `${study.client} Success Story | LedgerCart`
-  }, [study])
+
+    const origin = window.location.origin
+    if (study) {
+      applySeo({
+        title: `${study.client} Success Story | LedgerCart`,
+        description: `${study.client} case study: how LedgerCart delivered measurable impact through secure software and ERP modernization.`,
+        canonicalUrl: `${origin}/case-studies/${study.slug}`,
+        robots: 'index, follow',
+        ogType: 'article',
+        imageUrl: `${origin}/og-image.png`,
+      })
+    } else {
+      applySeo({
+        title: 'Case Study Not Found | LedgerCart',
+        description: 'The requested case study could not be found.',
+        canonicalUrl: `${origin}/case-studies/${slug}`,
+        robots: 'noindex, follow',
+        ogType: 'website',
+        imageUrl: `${origin}/og-image.png`,
+      })
+    }
+  }, [slug, study])
+
+  if (!study) {
+    return (
+      <div className="min-h-screen bg-white dark:bg-[#0a0f1a] flex flex-col items-center justify-center">
+        <p className="text-xl text-gray-500 mb-4">Case study not found</p>
+        <Link to="/case-studies" className="text-orange-600 hover:underline">← Back to Case Studies</Link>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0a0f1a] transition-colors duration-300">

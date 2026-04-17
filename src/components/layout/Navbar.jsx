@@ -109,8 +109,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  useEffect(() => setMobileOpen(false), [location])
-
   const linkCls = (path) => [
     'inline-flex items-center gap-1 px-3 py-[7px] text-[14px] font-medium rounded-lg transition-all no-underline',
     location.pathname === path
@@ -129,7 +127,7 @@ export default function Navbar() {
           ? 'max-w-[1150px] rounded-2xl shadow-[0_12px_40px_-10px_rgba(0,0,0,0.12)] dark:shadow-[0_12px_40px_-10px_rgba(0,0,0,0.5)] border border-gray-200/80 dark:border-slate-800'
           : 'max-w-full rounded-none shadow-none border-b border-transparent'
       }`}>
-        <div className="max-w-[1280px] mx-auto px-6 h-[64px] flex items-center justify-between xl:justify-start gap-4 xl:gap-6">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 h-[64px] flex items-center justify-between xl:justify-start gap-4 xl:gap-6">
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
@@ -208,14 +206,14 @@ export default function Navbar() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden border-t border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pb-4 pt-1 flex flex-col gap-0.5 animate-fadeInDown">
-          <Link to="/"                  className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">Home</Link>
-          <Link to="/product" className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">LedgerCart ERP</Link>
-          <Link to="/about" className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">About Us</Link>
-          <Link to="/blog" className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">Blog</Link>
-          <Link to="/solution" className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">Solutions</Link>
-          <Link to="/service" className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">Services</Link>
-          <Link to="/careers" className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">Careers</Link>
-          <Link to="/contact" className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">Contact Us</Link>
+          <Link to="/" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">Home</Link>
+          <Link to="/product" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">LedgerCart ERP</Link>
+          <Link to="/about" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">About Us</Link>
+          <Link to="/blog" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">Blog</Link>
+          <Link to="/solution" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">Solutions</Link>
+          <Link to="/service" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">Services</Link>
+          <Link to="/careers" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">Careers</Link>
+          <Link to="/contact" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">Contact Us</Link>
           <div className="flex gap-2 mt-2 pointer-events-auto">
             <button onClick={() => { setMobileOpen(false); setIsContactModalOpen(true); }} className="flex-1 text-center border-none cursor-pointer px-4 py-3 text-sm font-bold text-white bg-orange-600 rounded-xl no-underline dark:shadow-lg dark:shadow-orange-900/20">Get a free Consultation</button>
           </div>

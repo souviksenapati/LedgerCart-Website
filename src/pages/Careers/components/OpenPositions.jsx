@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useCachedFetch } from '../../../hooks/useCachedFetch'
 
 export default function OpenPositions() {
-  const { data: rawJobs, loading, error } = useCachedFetch('jobs', '*', { column: 'created_at', ascending: false })
+  const { data: rawJobs, loading, error: _error } = useCachedFetch('jobs', '*', { column: 'created_at', ascending: false })
   const [expandedId, setExpandedId] = useState(null)
 
   // Filter out expired jobs

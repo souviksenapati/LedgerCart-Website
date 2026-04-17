@@ -9,6 +9,36 @@ export function AuthProvider({ children }) {
   const [userName, setUserName] = useState('')
   const [loading, setLoading] = useState(true)
 
+  const handleUserResult = async (supabaseUser) => {
+    if (supabaseUser) {
+      setUser(supabaseUser)
+      try {
+        const { data, error } = await supabase
+          .from('admin_users')
+          .select('role, name')
+          .eq('email', supabaseUser.email)
+          .single()
+
+        if (data && !error) {
+          setRole(data.role)
+          setUserName(data.name)
+        } else {
+          await supabase.auth.signOut()
+          setUser(null)
+          setRole(null)
+          setUserName('')
+        }
+      } catch {
+        setRole(null)
+      }
+    } else {
+      setUser(null)
+      setRole(null)
+      setUserName('')
+    }
+    setLoading(false)
+  }
+
   useEffect(() => {
     const getSession = async () => {
       const { data: { session } } = await supabase.auth.getSession()
@@ -24,36 +54,6 @@ export function AuthProvider({ children }) {
     
     getSession()
   }, [])
-
-  const handleUserResult = async (supabaseUser) => {
-    if (supabaseUser) {
-      setUser(supabaseUser)
-      try {
-        const { data, error } = await supabase
-          .from('admin_users')
-          .select('role, name')
-          .eq('email', supabaseUser.email)
-          .single()
-          
-        if (data && !error) {
-          setRole(data.role)
-          setUserName(data.name)
-        } else {
-          await supabase.auth.signOut()
-          setUser(null)
-          setRole(null)
-          setUserName('')
-        }
-      } catch (e) {
-        setRole(null)
-      }
-    } else {
-      setUser(null)
-      setRole(null)
-      setUserName('')
-    }
-    setLoading(false)
-  }
 
   const login = async (email, password) => {
     const { data, error } = await supabase.auth.signInWithPassword({

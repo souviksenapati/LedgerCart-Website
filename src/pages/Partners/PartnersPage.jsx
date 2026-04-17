@@ -3,16 +3,18 @@ import AnnouncementBar from '../../components/layout/AnnouncementBar'
 import Navbar from '../../components/layout/Navbar'
 import Footer from '../../components/layout/Footer'
 
-export default function PartnersPage() {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-
-  const Section = ({ children, className = "" }) => (
+function Section({ children, className = '' }) {
+  return (
     <section className={`py-20 md:py-32 px-6 ${className}`}>
       <div className="max-w-[1280px] mx-auto">{children}</div>
     </section>
   )
+}
+
+export default function PartnersPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0a0f1a] transition-colors duration-300">
