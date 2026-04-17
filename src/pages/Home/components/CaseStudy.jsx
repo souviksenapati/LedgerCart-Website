@@ -1,6 +1,6 @@
 export default function CaseStudy() {
   return (
-    <section className="py-[60px] bg-white dark:bg-slate-950 transition-colors duration-300">
+    <section className="py-[60px] bg-white dark:bg-[#0a0f1a] transition-colors duration-300">
       <div className="max-w-[1280px] mx-auto px-6">
         <div className="bg-gray-50 dark:bg-slate-900/50 border border-gray-200 dark:border-slate-800 rounded-[20px] p-12 grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-12 items-center">
           {/* Left */}

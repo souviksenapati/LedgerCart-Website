@@ -12,25 +12,25 @@ export default function BlogPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
+    const fetchBlogs = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('blogs')
+          .select('*')
+          .order('created_at', { ascending: false })
+        if (data && !error) {
+          setPosts(data)
+        } else if (error) {
+          console.error(error)
+        }
+      } catch (err) {
+        console.error(err)
+      }
+      setLoading(false)
+    }
+
     fetchBlogs()
   }, [])
-
-  const fetchBlogs = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('blogs')
-        .select('*')
-        .order('created_at', { ascending: false })
-      if (data && !error) {
-        setPosts(data)
-      } else if (error) {
-        console.error(error)
-      }
-    } catch (err) {
-      console.error(err)
-    }
-    setLoading(false)
-  }
 
   const filteredPosts = filter === 'All' ? posts : posts.filter(p => p.category === filter)
 

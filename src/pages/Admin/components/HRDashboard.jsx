@@ -138,7 +138,7 @@ function ApplicationRow({ app, onUpdate }) {
 }
 
 export default function HRDashboard() {
-  const { userName, logout } = useAuth()
+  const { userName: _userName, logout: _logout } = useAuth()
   const [applications, setApplications] = useState([])
   const [loading, setLoading]           = useState(true)
   const [search,  setSearch]            = useState('')
@@ -149,6 +149,7 @@ export default function HRDashboard() {
     const fetchApplications = async () => {
       try {
         const { data, error } = await supabase.from('applications').select('*').order('submitted_at', { ascending: false })
+        if (error) console.error(error)
         if (data) setApplications(data)
       } catch (err) { 
         console.error(err) 
