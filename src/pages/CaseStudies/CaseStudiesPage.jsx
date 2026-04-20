@@ -7,27 +7,27 @@ import Footer from '../../components/layout/Footer'
 const CASE_STUDIES = [
   {
     id: 1,
-    slug: 'transglobal-logistics-erp',
-    client: 'TransGlobal Logistics',
-    title: 'Automating Multi-Region Supply Chains with LedgerCart ERP',
+    slug: 'intugine-logistics-erp',
+    client: 'Intugine Technologies',
+    title: 'Automating Real-Time Shipment Tracking with LedgerCart ERP',
     result: '40% Reduction in Operational Costs',
     industry: 'Logistics',
     image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1280&auto=format&fit=crop',
-    challenge: 'Fragmented data silos across 12 countries, leading to 15% manual data entry error rate.',
-    solution: 'Deployment of a unified LedgerCart ERP instance with custom multi-currency and real-time customs integration.',
-    impact: 'Established a single source of truth, reducing lead times by 22% and eliminating manual reconciliation errors.'
+    challenge: 'Fragmented carrier data across 8 Indian logistics hubs, leading to 15% manual data reconciliation errors and delayed SLA alerts.',
+    solution: 'Deployment of a unified LedgerCart ERP instance with a real-time carrier API integration layer and automated SLA dashboard.',
+    impact: 'Established a single source of operational truth, cutting lead times by 22% and eliminating manual shipment reconciliation errors.'
   },
   {
     id: 2,
-    slug: 'healthprime-telehealth',
-    client: 'HealthPrime Wellness',
-    title: 'Secure Patient Portals: Digital Transformation for Urban Clinics',
-    result: '99.9% Patient Data Accessibility',
-    industry: 'Healthcare',
-    image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1280&auto=format&fit=crop',
-    challenge: 'Obsolete legacy systems and inability to share data across cardiology and oncology wards.',
-    solution: 'Custom-engineered, HIPAA-compliant patient portal integrated with real-time diagnostic AI agents.',
-    impact: 'Patients can now access records in under 3 seconds, resulting in a 30% increase in outpatient throughput.'
+    slug: 'arka2050-cleantech-portal',
+    client: 'Arka2050',
+    title: 'Building a Secure Carbon Credit Management Platform for Green Kolkata',
+    result: '99.9% Data Accessibility & Audit Compliance',
+    industry: 'CleanTech',
+    image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=1280&auto=format&fit=crop',
+    challenge: 'Inability to track and audit carbon credit transactions across multiple urban development partners and government bodies in West Bengal.',
+    solution: 'Custom-engineered compliance portal with immutable audit trails, role-based access controls, and real-time MRV (Measurement, Reporting & Verification) dashboards.',
+    impact: 'Project teams now access verified carbon data in under 3 seconds, resulting in a 30% acceleration in project certification timelines.'
   }
 ]
 

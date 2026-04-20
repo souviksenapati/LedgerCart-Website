@@ -6,10 +6,10 @@ export default function Testimonial() {
           "With LedgerCart ERP, the implementation process was structured and seamless. Their team handled our complex data migration, significantly simplifying our daily operations."
         </blockquote>
         <div className="flex items-center justify-center gap-3.5">
-          <div className="w-11 h-11 rounded-full bg-gradient-to-br from-orange-600 to-orange-400 flex items-center justify-center text-sm font-bold text-white flex-shrink-0 shadow-lg shadow-orange-600/20">JK</div>
+          <div className="w-11 h-11 rounded-full bg-gradient-to-br from-orange-600 to-orange-400 flex items-center justify-center text-sm font-bold text-white flex-shrink-0 shadow-lg shadow-orange-600/20">RD</div>
           <div className="text-left">
-            <div className="text-sm font-bold text-gray-900 dark:text-slate-200">Enterprise Operations Lead</div>
-            <div className="text-[13px] text-gray-500 dark:text-slate-400">Chief Operations Officer, LedgerCart Client Organization</div>
+            <div className="text-sm font-bold text-gray-900 dark:text-slate-200">Rajesh Das</div>
+            <div className="text-[13px] text-gray-500 dark:text-slate-400">Chief Operations Officer, Intugine Technologies</div>
           </div>
         </div>
       </div>

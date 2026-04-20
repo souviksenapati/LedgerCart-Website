@@ -29,8 +29,8 @@ export default function ContactGrid() {
            <div className="flex items-center gap-3 relative z-10">
              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-gray-200 to-gray-400 dark:from-slate-700 dark:to-slate-500"></div>
              <div>
-               <p className="text-xs font-bold text-gray-900 dark:text-slate-200">Sarah Jenkins</p>
-               <p className="text-xs text-gray-500 dark:text-slate-500">CTO, LedgerCart Client Partner</p>
+               <p className="text-xs font-bold text-gray-900 dark:text-slate-200">Priya Mukherjee</p>
+               <p className="text-xs text-gray-500 dark:text-slate-500">CTO, Recko (Kolkata Fintech)</p>
              </div>
            </div>
         </div>
