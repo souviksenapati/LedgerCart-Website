@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import AnnouncementBar from '../../components/layout/AnnouncementBar'
 import Navbar from '../../components/layout/Navbar'
 import Footer from '../../components/layout/Footer'
+import faviconImg from '../../assets/favicon.png'
+import faviconDarkImg from '../../assets/favicon_dark.png'
 
 function Section({ children, className = '' }) {
   return (
@@ -57,7 +59,8 @@ export default function AboutPage() {
             </div>
             <div className="bg-orange-600/5 dark:bg-orange-500/5 border border-orange-200/50 dark:border-orange-500/20 rounded-[32px] p-10 relative overflow-hidden">
                <div className="absolute top-0 right-0 p-8 opacity-10">
-                 <svg width="200" height="200" viewBox="0 0 36 36" fill="currentColor"><rect width="36" height="36" rx="8"/></svg>
+                 <img src={faviconDarkImg} alt="" className="w-[120px] h-[120px] object-contain dark:hidden" />
+                 <img src={faviconImg}     alt="" className="w-[120px] h-[120px] object-contain hidden dark:block" />
                </div>
                <blockquote className="relative z-10">
                  <p className="text-xl italic font-medium text-gray-800 dark:text-slate-200 mb-6">

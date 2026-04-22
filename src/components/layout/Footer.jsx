@@ -1,20 +1,15 @@
 import { memo } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTheme } from '../../context/ThemeContext'
+import logoImg from '../../assets/logo.png'
+import logoDarkImg from '../../assets/logo_dark.png'
 
 const Logo = () => (
-  <Link to="/" className="flex items-center gap-[10px] mb-5 no-underline">
-    <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
-      <rect width="36" height="36" rx="8" fill="#ea580c"/>
-      <rect x="10" y="8"  width="16" height="4" rx="1" fill="white"/>
-      <rect x="10" y="8"  width="4"  height="10" rx="1" fill="white"/>
-      <rect x="10" y="16" width="16" height="4" rx="1" fill="white"/>
-      <rect x="22" y="18" width="4"  height="10" rx="1" fill="white"/>
-      <rect x="10" y="24" width="16" height="4" rx="1" fill="white"/>
-    </svg>
-    <div className="flex flex-col leading-[1.1] justify-center">
-      <span className="text-[20px] font-bold text-gray-900 dark:text-slate-100 tracking-[-0.3px]">LedgerCart</span>
-    </div>
+  <Link to="/" className="flex items-center mb-5 no-underline">
+    {/* Light site theme → dark logo (visible on white bg) */}
+    <img src={logoDarkImg} alt="LedgerCart" className="h-[40px] w-auto object-contain dark:hidden" />
+    {/* Dark site theme → normal logo (visible on dark bg) */}
+    <img src={logoImg}     alt="LedgerCart" className="h-[40px] w-auto object-contain hidden dark:block" />
   </Link>
 )
 
