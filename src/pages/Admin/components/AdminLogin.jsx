@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '../../../context/AuthContext'
+import logoImg from '../../../assets/logo.png'
+import logoDarkImg from '../../../assets/logo_dark.png'
 
 export default function AdminLogin() {
   const { login } = useAuth()
@@ -32,16 +34,9 @@ export default function AdminLogin() {
 
       <div className="relative z-10 w-full max-w-[420px]">
         {/* Logo */}
-        <div className="flex items-center justify-center gap-3 mb-10">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <rect width="36" height="36" rx="8" fill="#ea580c"/>
-            <rect x="10" y="8"  width="16" height="4" rx="1" fill="white"/>
-            <rect x="10" y="8"  width="4"  height="10" rx="1" fill="white"/>
-            <rect x="10" y="16" width="16" height="4" rx="1" fill="white"/>
-            <rect x="22" y="18" width="4"  height="10" rx="1" fill="white"/>
-            <rect x="10" y="24" width="16" height="4" rx="1" fill="white"/>
-          </svg>
-          <span className="text-[22px] font-bold text-gray-900 dark:text-white tracking-[-0.3px]">LedgerCart</span>
+        <div className="flex items-center justify-center mb-10">
+          <img src={logoDarkImg} alt="LedgerCart" className="h-[48px] w-auto object-contain dark:hidden" />
+          <img src={logoImg}     alt="LedgerCart" className="h-[48px] w-auto object-contain hidden dark:block" />
         </div>
 
         {/* Card */}

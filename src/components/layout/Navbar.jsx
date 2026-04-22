@@ -1,19 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import ContactModal from '../shared/ContactModal'
-
-/* ── LedgerCart Logo: orange rounded square with white segmented "S" ── */
-const LedgerCartLogo = ({ size = 34 }) => (
-  <svg width={size} height={size} viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="36" height="36" rx="8" fill="#ea580c"/>
-    {/* Segmented "S" shape */}
-    <rect x="10" y="8"  width="16" height="4" rx="1" fill="white"/>
-    <rect x="10" y="8"  width="4"  height="10" rx="1" fill="white"/>
-    <rect x="10" y="16" width="16" height="4" rx="1" fill="white"/>
-    <rect x="22" y="18" width="4"  height="10" rx="1" fill="white"/>
-    <rect x="10" y="24" width="16" height="4" rx="1" fill="white"/>
-  </svg>
-)
+import logoImg from '../../assets/logo.png'
+import logoDarkImg from '../../assets/logo_dark.png'
+import faviconImg from '../../assets/favicon.png'
+import faviconDarkImg from '../../assets/favicon_dark.png'
 
 const PRODUCTS_ITEMS = [
   { to: '/product', title: 'LedgerCart ERP' },
@@ -60,7 +51,8 @@ function NeedAssistanceCard() {
   return (
     <div className="bg-[#f0f9ff] dark:bg-orange-950/20 p-6 rounded-2xl border border-blue-100/50 dark:border-orange-900/20 flex flex-col items-center text-center max-w-[240px]">
       <div className="mb-4 bg-white dark:bg-slate-800 p-2 rounded-xl shadow-sm">
-        <LedgerCartLogo size={50} />
+        <img src={faviconDarkImg} alt="LedgerCart" className="w-[50px] h-[50px] object-contain dark:hidden" />
+        <img src={faviconImg}     alt="LedgerCart" className="w-[50px] h-[50px] object-contain hidden dark:block" />
       </div>
       <h4 className="text-[15px] font-bold text-gray-900 dark:text-slate-100 mb-2 leading-snug">Need Assistance?<br />Schedule a Meeting Now!</h4>
       <Link 
@@ -129,12 +121,10 @@ export default function Navbar() {
       }`}>
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 h-[64px] flex items-center justify-between xl:justify-start gap-4 xl:gap-6">
 
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
-          <LedgerCartLogo size={34} />
-          <div className="flex flex-col leading-[1.15] justify-center">
-            <span className="text-[18px] font-bold text-gray-900 dark:text-slate-100 tracking-[-0.3px]">LedgerCart</span>
-          </div>
+        {/* Logo — light/dark swap */}
+        <Link to="/" className="flex items-center flex-shrink-0">
+          <img src={logoDarkImg} alt="LedgerCart" className="h-[44px] w-auto object-contain dark:hidden" />
+          <img src={logoImg}     alt="LedgerCart" className="h-[44px] w-auto object-contain hidden dark:block" />
         </Link>
 
         {/* Desktop links */}

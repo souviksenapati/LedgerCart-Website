@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import faviconImg from '../../../assets/favicon.png'
+import faviconDarkImg from '../../../assets/favicon_dark.png'
 
 /* ══════════════════════════════════════════════════════════════════
    PIXEL-FAITHFUL MERGE.DEV DESIGN SYSTEM
@@ -365,8 +367,8 @@ const ROWS = [
    Measured precisely against merge.dev reference screenshot.
 ─────────────────────────────────────────────────────────────────── */
 const N         = ROWS.length        // 8
-const ROW_H     = 68                 // px per row (spacious, like merge.dev)
-const TOTAL_H   = N * ROW_H         // 544
+const ROW_H     = 80                 // px per row — matches Merge.dev 640px total
+const TOTAL_H   = N * ROW_H         // 640
 
 // SVG canvas covers the full section width
 // The left panel (icon box + label) sits in 0…240 px
@@ -377,7 +379,7 @@ const TOTAL_H   = N * ROW_H         // 544
 const SVG_W     = 1080
 const LABEL_END = 240                // x where path begins (right of label)
 const HUB_CX    = 505                // hub oval center x
-const HUB_CY    = TOTAL_H / 2       // hub oval center y = 272
+const HUB_CY    = TOTAL_H / 2       // hub oval center y = 320
 const HUB_RX    = 64                 // oval x-radius
 const HUB_RY    = 82                 // oval y-radius (TALLER, portrait)
 const DASH_LEFT = 758                // left x of product window
@@ -388,10 +390,11 @@ const DASH_W    = 272                // product window width
 function pathD(i) {
   const y0 = i * ROW_H + ROW_H / 2
   const xe = HUB_CX - HUB_RX           // 441 — hub left tangent
-  const ye = HUB_CY                    // 272
-  // Two control points: fan evenly between source and hub
-  const cx1 = LABEL_END + (xe - LABEL_END) * 0.42
-  const cx2 = xe - 48
+  const ye = HUB_CY                    // 320
+  // cx1 at 0.52 → curve stays horizontal longer before sweeping into hub
+  // cx2 at xe-40 → gentle approach tangent at hub entry
+  const cx1 = LABEL_END + (xe - LABEL_END) * 0.52
+  const cx2 = xe - 40
   return `M${LABEL_END},${y0} C${cx1},${y0} ${cx2},${ye} ${xe},${ye}`
 }
 
@@ -410,34 +413,22 @@ const DOT_TIMING = [
   { dur: 3.9, begin: 1.9 },
 ]
 
-/* ─── LedgerCart Hub Mark ───────────────────────────────────────
-   Inspired by Merge's bold angular ">" arrow:
-   Bold black angular shape — LedgerCart adapted ledger mark.
-   Resembles an angular forward-arrow / bracket, very bold.
-─────────────────────────────────────────────────────────────────── */
+/* ─── Hub favicon image (replaces the hand-drawn SVG mark) ─────── */
 const LedgerCartMark = () => (
-  <svg width="58" height="58" viewBox="0 0 58 58" fill="none">
-    {/* Shape inspired by Merge's angular arrow — bold black */}
-    {/* Top arm going down-right */}
-    <path
-      d="M16 12 L38 29 L16 46"
-      stroke={HUB_TXT}
-      strokeWidth="8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      fill="none"
-    />
-    {/* Second stroke — slightly offset for LedgerCart double-mark */}
-    <path
-      d="M26 18 L40 29 L26 40"
-      stroke={HUB_TXT}
-      strokeWidth="5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      fill="none"
-      opacity="0.28"
-    />
-  </svg>
+  <img
+    src={faviconImg}
+    alt="LedgerCart"
+    style={{ width: 64, height: 64, objectFit: 'contain', display: 'block' }}
+    className="dark:hidden"
+  />
+)
+const LedgerCartMarkDark = () => (
+  <img
+    src={faviconDarkImg}
+    alt="LedgerCart"
+    style={{ width: 64, height: 64, objectFit: 'contain', display: 'none' }}
+    className="hidden dark:block"
+  />
 )
 
 /* ─── SVG LAYER (paths + hub oval + dots) ───────────────────────── */
@@ -449,12 +440,24 @@ const FlowSVG = () => (
     fill="none"
     style={{ position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'visible' }}
   >
+    {/* ── Techy Hub: hexagon + glow rings + circuit nodes ── */}
     <defs>
       {ROWS.map((_, i) => (
         <path key={i} id={`lp${i}`} d={pathD(i)} />
       ))}
       <path id="rp" d={RIGHT_D} />
+      {/* Soft floating drop shadow — matches Merge.dev reference */}
+      <filter id="hubShadow" x="-20%" y="-15%" width="140%" height="130%">
+        <feDropShadow dx="0" dy="4" stdDeviation="10" floodColor="rgba(0,0,0,0.10)" />
+      </filter>
     </defs>
+
+    {/* ── Hub oval — near-white fill + soft drop shadow, 1px thin border ── */}
+    <ellipse cx={HUB_CX} cy={HUB_CY} rx={HUB_RX} ry={HUB_RY}
+      fill={HUB_FILL} filter="url(#hubShadow)" />
+    {/* 1px thin outer border ring — #DEDAD5 approx, very faint */}
+    <ellipse cx={HUB_CX} cy={HUB_CY} rx={HUB_RX} ry={HUB_RY}
+      fill="none" stroke={HUB_RING} strokeWidth="1.5" />
 
     {/* ── Dashed bezier paths (left → hub) ── */}
     {ROWS.map((_, i) => (
@@ -467,25 +470,6 @@ const FlowSVG = () => (
         fill="none"
       />
     ))}
-
-    {/* ── Hub oval ── */}
-    <ellipse
-      cx={HUB_CX}
-      cy={HUB_CY}
-      rx={HUB_RX}
-      ry={HUB_RY}
-      fill={HUB_FILL}
-    />
-    {/* Very subtle inner shadow ring */}
-    <ellipse
-      cx={HUB_CX}
-      cy={HUB_CY}
-      rx={HUB_RX - 1}
-      ry={HUB_RY - 1}
-      fill="none"
-      stroke={HUB_RING}
-      strokeWidth="4"
-    />
 
     {/* ── Right horizontal line (hub → product window) ── solid thin ── */}
     <line
@@ -578,7 +562,7 @@ const IntegrationRows = () => (
   </div>
 )
 
-/* ─── HUB CENTER (logo overlaid on oval) ───────────────────────── */
+/* ─── HUB CENTER (favicon overlaid on techy hub oval) ──────────── */
 const HubCenter = () => (
   <div style={{
     position: 'absolute',
@@ -590,24 +574,22 @@ const HubCenter = () => (
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 0,
     pointerEvents: 'none',
   }}>
-    <LedgerCartMark />
-    {/* "LedgerCart" label below the oval — positioned after the oval ends */}
-    <div style={{
-      position: 'absolute',
-      bottom: -32,
-      left: '50%',
-      transform: 'translateX(-50%)',
-      fontSize: 18,
-      fontWeight: 600,
-      color: HUB_TXT,
-      letterSpacing: '-0.022em',
-      whiteSpace: 'nowrap',
-    }}>
-      LedgerCart
-    </div>
+    {/* Light theme → dark favicon (visible on light bg) */}
+    <img
+      src={faviconDarkImg}
+      alt="LedgerCart"
+      style={{ width: 64, height: 64, objectFit: 'contain' }}
+      className="dark:hidden"
+    />
+    {/* Dark theme → light favicon (visible on dark bg) */}
+    <img
+      src={faviconImg}
+      alt="LedgerCart"
+      style={{ width: 64, height: 64, objectFit: 'contain', display: 'none' }}
+      className="hidden dark:block"
+    />
   </div>
 )
 

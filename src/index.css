@@ -54,9 +54,9 @@
     --homehero-box-bg: #FFFFFF;
     --homehero-box-border: #E0DDD8;
     --homehero-line: #C6C3BD;
-    --homehero-hub-fill: #ECEAE8;
+    --homehero-hub-fill: #F8F7F5;
     --homehero-hub-text: #1A1817;
-    --homehero-hub-ring: rgba(0,0,0,0.04);
+    --homehero-hub-ring: rgba(0,0,0,0.07);
     --homehero-label: #2C2C2C;
     --homehero-dot: #f97316;
   }
@@ -99,9 +99,9 @@
     --homehero-box-bg: rgba(255,255,255,0.92);
     --homehero-box-border: rgba(15,23,42,0.14);
     --homehero-line: rgba(148,163,184,0.35);
-    --homehero-hub-fill: #111827;
+    --homehero-hub-fill: #1e2433;
     --homehero-hub-text: #f1f5f9;
-    --homehero-hub-ring: rgba(255,255,255,0.06);
+    --homehero-hub-ring: rgba(255,255,255,0.08);
     --homehero-label: #e2e8f0;
     --homehero-dot: #f97316;
   }
