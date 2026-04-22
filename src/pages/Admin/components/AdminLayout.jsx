@@ -5,6 +5,8 @@ import SalesDashboard from './SalesDashboard'
 import UserManagement from './UserManagement'
 import HRJobManagement from './HRJobManagement'
 import MarketingBlogManagement from './MarketingBlogManagement'
+import faviconImg from '../../../assets/favicon.png'
+import faviconDarkImg from '../../../assets/favicon_dark.png'
 
 export default function AdminLayout() {
   const { role, userName, logout } = useAuth()
@@ -48,14 +50,8 @@ export default function AdminLayout() {
       <div className="w-64 bg-white dark:bg-slate-900 border-r border-gray-200 dark:border-slate-800 flex flex-col fixed h-full z-20">
         <div className="p-6 border-b border-gray-100 dark:border-slate-800">
           <div className="flex items-center gap-3 mb-2">
-            <svg width="24" height="24" viewBox="0 0 36 36" fill="none">
-              <rect width="36" height="36" rx="8" fill="#ea580c"/>
-              <rect x="10" y="8"  width="16" height="4" rx="1" fill="white"/>
-              <rect x="10" y="8"  width="4"  height="10" rx="1" fill="white"/>
-              <rect x="10" y="16" width="16" height="4" rx="1" fill="white"/>
-              <rect x="22" y="18" width="4"  height="10" rx="1" fill="white"/>
-              <rect x="10" y="24" width="16" height="4" rx="1" fill="white"/>
-            </svg>
+            <img src={faviconDarkImg} alt="LC" className="w-6 h-6 object-contain dark:hidden" />
+            <img src={faviconImg}     alt="LC" className="w-6 h-6 object-contain hidden dark:block" />
             <span className="font-bold text-gray-900 dark:text-slate-100 uppercase tracking-wide">Admin Portal</span>
           </div>
           <p className="text-xs text-gray-500 dark:text-slate-400 mb-0">Logged in as <span className="font-semibold text-orange-600">{userName}</span></p>
