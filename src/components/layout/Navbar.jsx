@@ -129,7 +129,17 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-0.5 flex-1 h-full">
-          <Link to="/product" className={linkCls('/product')}>Products</Link>
+          {/* Products dropdown */}
+          <div className="relative group h-full flex items-center">
+            <button className={`${location.pathname.startsWith('/product') ? 'text-orange-600 bg-orange-50 dark:bg-orange-950/30' : 'text-gray-700 dark:text-slate-300'} inline-flex items-center gap-1.5 px-3 py-[7px] text-[14px] font-medium rounded-lg hover:text-orange-600 hover:bg-gray-50 dark:hover:bg-slate-800 transition-all bg-transparent border-none cursor-pointer`}>
+              Products <span className="text-[10px] opacity-40">▾</span>
+            </button>
+            <div className="absolute top-[100%] left-0 pt-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 -translate-y-2 group-hover:translate-y-0 z-[1000]">
+              <div className="bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-2xl shadow-[0_12px_48px_rgba(0,0,0,0.12)] dark:shadow-[0_12px_48px_rgba(0,0,0,0.5)] min-w-[500px]">
+                <DropMenu items={PRODUCTS_ITEMS} columns={1} />
+              </div>
+            </div>
+          </div>
 
           {/* Solutions dropdown */}
           <div className="relative group h-full flex items-center">
