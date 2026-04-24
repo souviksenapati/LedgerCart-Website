@@ -5,9 +5,12 @@ import logoImg from '../../assets/logo.png'
 import logoDarkImg from '../../assets/logo_dark.png'
 import faviconImg from '../../assets/favicon.png'
 import faviconDarkImg from '../../assets/favicon_dark.png'
+import erpLogoLight from '../../assets/LedgerCart ERP Logo Light.png'
+import erpLogoDark from '../../assets/LedgerCart ERP Logo Dark.png'
 
 const PRODUCTS_ITEMS = [
-  { to: '/product', title: 'LedgerCart ERP' },
+  { to: '/product', title: 'All Products' },
+  { to: '/product/ledgercart-erp', title: 'LedgerCart ERP', logoOnly: true },
 ]
 
 const SOLUTIONS = [
@@ -67,17 +70,29 @@ function NeedAssistanceCard() {
 
 function DropMenu({ items, columns = 1 }) {
   return (
-    <div className="flex gap-8 p-6 pr-4">
+    <div className="flex items-start gap-8 p-6 pr-4">
       {/* Links Column(s) */}
-      <div className={`grid gap-x-12 gap-y-2.5 ${columns === 3 ? 'grid-cols-3' : columns === 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+      <div className={`grid content-start gap-x-12 gap-y-2.5 ${columns === 3 ? 'grid-cols-3' : columns === 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
         {items.map((item) => (
-          <Link
-            key={item.title}
-            to={item.to}
-            className="text-[14px] font-medium text-gray-600 dark:text-slate-400 hover:text-orange-600 transition-colors py-1.5 no-underline block"
-          >
-            {item.title}
-          </Link>
+          item.logoOnly ? (
+            <Link
+              key={item.title}
+              to={item.to}
+              className="py-1.5 no-underline inline-flex items-center"
+              aria-label={item.title}
+            >
+              <img src={erpLogoLight} alt={item.title} className="h-9 w-auto object-contain dark:hidden" />
+              <img src={erpLogoDark} alt={item.title} className="h-9 w-auto object-contain hidden dark:block" />
+            </Link>
+          ) : (
+            <Link
+              key={item.title}
+              to={item.to}
+              className="text-[14px] font-medium text-gray-600 dark:text-slate-400 hover:text-orange-600 transition-colors py-1.5 no-underline block"
+            >
+              {item.title}
+            </Link>
+          )
         ))}
       </div>
       
@@ -207,7 +222,8 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="md:hidden border-t border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pb-4 pt-1 flex flex-col gap-0.5 animate-fadeInDown">
           <Link to="/" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">Home</Link>
-          <Link to="/product" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">LedgerCart ERP</Link>
+          <Link to="/product" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">Products</Link>
+          <Link to="/product/ledgercart-erp" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">LedgerCart ERP</Link>
           <Link to="/about" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">About Us</Link>
           <Link to="/blog" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">Blog</Link>
           <Link to="/solution" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-orange-600 transition-colors">Solutions</Link>

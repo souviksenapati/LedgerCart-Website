@@ -33,7 +33,7 @@ const StaticIcon = () => (
 const services = [
   { icon: AppHostingIcon, name: 'Web Development', desc: 'Custom web applications built with modern frameworks for optimal performance.', to: '/service#web-development' },
   { icon: StorageIcon, name: 'Managed IT', desc: 'End-to-end technology management, infrastructure setup, and 24/7 support.', to: '/service#digital-transformation' },
-  { icon: DatabaseIcon, name: 'LedgerCart ERP', desc: 'Our flagship enterprise resource planning system tailored to your business.', to: '/product' },
+  { icon: DatabaseIcon, name: 'LedgerCart ERP', desc: 'Our flagship enterprise resource planning system tailored to your business.', to: '/product/ledgercart-erp' },
   { icon: StaticIcon, name: 'Cybersecurity', desc: 'Comprehensive audits, penetration testing, and enterprise-grade network security.', to: '/service#cyber-security' },
 ]
 
