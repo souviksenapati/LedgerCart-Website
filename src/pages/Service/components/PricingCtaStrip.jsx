@@ -9,7 +9,7 @@ export default function PricingCtaStrip() {
         <p className="text-base text-gray-500 dark:text-slate-400 mb-8">Let's discuss how LedgerCart can transform your business workflows.</p>
         <div className="flex items-center justify-center gap-3.5 flex-wrap">
           <Link to="/contact" className="px-7 py-3.5 text-[15px] font-semibold text-white bg-orange-600 rounded-[10px] hover:bg-orange-700 transition-all hover:-translate-y-px no-underline shadow-lg shadow-orange-600/20">Request a Consultation</Link>
-          <Link to="/product" className="px-7 py-3.5 text-[15px] font-semibold text-gray-800 dark:text-slate-300 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-[10px] hover:border-gray-800 dark:hover:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-800 transition-all no-underline">Explore LedgerCart ERP</Link>
+          <Link to="/product/ledgercart-erp" className="px-7 py-3.5 text-[15px] font-semibold text-gray-800 dark:text-slate-300 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-[10px] hover:border-gray-800 dark:hover:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-800 transition-all no-underline">Explore LedgerCart ERP</Link>
         </div>
       </div>
     </section>
