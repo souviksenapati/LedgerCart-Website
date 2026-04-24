@@ -31,10 +31,10 @@ const StaticIcon = () => (
 )
 
 const services = [
-  { icon: AppHostingIcon, name: 'Web Development', desc: 'Custom web applications built with modern frameworks for optimal performance.', to: '/service' },
-  { icon: StorageIcon, name: 'Managed IT', desc: 'End-to-end technology management, infrastructure setup, and 24/7 support.', to: '/service' },
+  { icon: AppHostingIcon, name: 'Web Development', desc: 'Custom web applications built with modern frameworks for optimal performance.', to: '/service#web-development' },
+  { icon: StorageIcon, name: 'Managed IT', desc: 'End-to-end technology management, infrastructure setup, and 24/7 support.', to: '/service#digital-transformation' },
   { icon: DatabaseIcon, name: 'LedgerCart ERP', desc: 'Our flagship enterprise resource planning system tailored to your business.', to: '/product' },
-  { icon: StaticIcon, name: 'Cybersecurity', desc: 'Comprehensive audits, penetration testing, and enterprise-grade network security.', to: '/service' },
+  { icon: StaticIcon, name: 'Cybersecurity', desc: 'Comprehensive audits, penetration testing, and enterprise-grade network security.', to: '/service#cyber-security' },
 ]
 
 export default function ServicesGrid() {
@@ -46,7 +46,7 @@ export default function ServicesGrid() {
         <p className="text-base text-gray-500 dark:text-slate-400 text-center max-w-[640px] mx-auto mb-[60px] leading-[1.7]">
           From strategy to execution – no operational worries, just seamless growth.<br />
           LedgerCart provides end-to-end technology services tailored to your enterprise.<br />
-          We have the <a href="/service" className="text-orange-600 no-underline hover:underline font-semibold">expertise</a> to make your vision a reality!
+          We have the <Link to="/service" className="text-orange-600 no-underline hover:underline font-semibold">expertise</Link> to make your vision a reality!
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {services.map((svc) => (
