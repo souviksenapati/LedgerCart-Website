@@ -46,6 +46,7 @@ async function main() {
     '/service',
     '/solution',
     '/product',
+    '/product/ledgercart-erp',
     '/case-studies',
     '/blog',
     '/partners',

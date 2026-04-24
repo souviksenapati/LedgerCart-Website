@@ -13,6 +13,7 @@ const ServicePage = lazy(() => import('./pages/Service/ServicePage'))
 const SolutionPage = lazy(() => import('./pages/Solution/SolutionPage'))
 const ContactPage = lazy(() => import('./pages/Contact/ContactPage'))
 const ProductPage = lazy(() => import('./pages/Product/ProductPage'))
+const LedgerCartErpPage = lazy(() => import('./pages/Product/LedgerCartErpPage'))
 const CareersPage = lazy(() => import('./pages/Careers/CareersPage'))
 const NotFoundPage = lazy(() => import('./pages/Error/NotFoundPage'))
 
@@ -98,6 +99,15 @@ const SEOEngine = () => {
       }
 
       if (pathname === '/product') {
+        return {
+          title: 'Products | LedgerCart',
+          description: 'Explore LedgerCart products built to help teams modernize operations, improve visibility, and scale with confidence.',
+          robots: 'index, follow',
+          ogType: 'website',
+        }
+      }
+
+      if (pathname === '/product/ledgercart-erp') {
         return {
           title: 'LedgerCart ERP | Product Overview',
           description: 'Learn how LedgerCart ERP helps standardize workflows, improve visibility, and automate operations with secure, scalable architecture.',
@@ -287,6 +297,7 @@ function App() {
               <Route path="/solution" element={<SolutionPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/product" element={<ProductPage />} />
+              <Route path="/product/ledgercart-erp" element={<LedgerCartErpPage />} />
               <Route path="/careers" element={<CareersPage />} />
               <Route path="/admin" element={<AdminPage />} />
               
