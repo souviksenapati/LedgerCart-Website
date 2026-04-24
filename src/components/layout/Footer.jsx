@@ -86,7 +86,8 @@ function Footer() {
             <div>
               <h4 className="text-[13px] font-bold text-gray-900 dark:text-slate-100 mb-4">Products</h4>
               <ul className="flex flex-col gap-2.5 list-none p-0 m-0 text-[14px]">
-                <li><Link to="/product" className="text-gray-500 dark:text-slate-400 hover:text-orange-600 transition-colors no-underline">LedgerCart ERP</Link></li>
+                <li><Link to="/product" className="text-gray-500 dark:text-slate-400 hover:text-orange-600 transition-colors no-underline">All Products</Link></li>
+                <li><Link to="/product/ledgercart-erp" className="text-gray-500 dark:text-slate-400 hover:text-orange-600 transition-colors no-underline">LedgerCart ERP</Link></li>
               </ul>
               <h4 className="text-[13px] font-bold text-gray-900 dark:text-slate-100 mb-4 mt-8">Solutions</h4>
               <ul className="flex flex-col gap-2.5 list-none p-0 m-0 text-[14px]">

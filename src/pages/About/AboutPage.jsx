@@ -2,8 +2,6 @@ import { useEffect } from 'react'
 import AnnouncementBar from '../../components/layout/AnnouncementBar'
 import Navbar from '../../components/layout/Navbar'
 import Footer from '../../components/layout/Footer'
-import faviconImg from '../../assets/favicon.png'
-import faviconDarkImg from '../../assets/favicon_dark.png'
 import CtaBanner from '../../components/shared/CtaBanner'
 
 function Section({ children, className = '', id = '' }) {
