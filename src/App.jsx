@@ -248,14 +248,23 @@ const SEOEngine = () => {
 
     // Scroll to top automatically on route changes (smooth ux)
     if (location.hash) {
-      setTimeout(() => {
-        const element = document.getElementById(location.hash.replace('#', ''))
+      const hash = location.hash.replace('#', '')
+      let attempts = 0
+      
+      const tryScroll = () => {
+        const element = document.getElementById(hash)
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' })
+        } else if (attempts < 20) {
+          // Retry for up to 2 seconds (20 * 100ms) to allow Suspense/lazy loading to finish
+          attempts++
+          setTimeout(tryScroll, 100)
         } else {
           window.scrollTo(0, 0)
         }
-      }, 100) // slight delay to ensure render
+      }
+      
+      tryScroll()
     } else {
       window.scrollTo(0, 0)
     }
