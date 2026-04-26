@@ -1,6 +1,7 @@
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import faviconImg from '../../../assets/favicon.png'
-import faviconDarkImg from '../../../assets/favicon_dark.png'
+import faviconWebp from '../../../assets/favicon.webp'
+import faviconDarkWebp from '../../../assets/favicon_dark.webp'
 
 /* ══════════════════════════════════════════════════════════════════
    PIXEL-FAITHFUL MERGE.DEV DESIGN SYSTEM
@@ -414,19 +415,21 @@ const DOT_TIMING = [
 ]
 
 /* ─── Hub favicon image (replaces the hand-drawn SVG mark) ─────── */
+// Light theme: scaled up to compensate for extra transparent padding in source image
 const LedgerCartMark = () => (
   <img
-    src={faviconImg}
+    src={faviconDarkWebp}
     alt="LedgerCart"
-    style={{ width: 64, height: 64, objectFit: 'contain', display: 'block' }}
-    className="dark:hidden"
+    style={{ width: 64, height: 64, objectFit: 'contain' }}
+    className="dark:hidden block"
   />
 )
+// Dark theme: trimmed image, no scale needed
 const LedgerCartMarkDark = () => (
   <img
-    src={faviconDarkImg}
+    src={faviconWebp}
     alt="LedgerCart"
-    style={{ width: 64, height: 64, objectFit: 'contain', display: 'none' }}
+    style={{ width: 64, height: 64, objectFit: 'contain' }}
     className="hidden dark:block"
   />
 )
@@ -576,19 +579,21 @@ const HubCenter = () => (
     justifyContent: 'center',
     pointerEvents: 'none',
   }}>
-    {/* Light theme → dark favicon (visible on light bg) */}
+    {/* Light theme → scaled up to compensate for extra padding in source */}
     <img
-      src={faviconDarkImg}
+      src={faviconDarkWebp}
       alt="LedgerCart"
       style={{ width: 64, height: 64, objectFit: 'contain' }}
-      className="dark:hidden"
+      className="block dark:hidden"
+      width="64" height="64"
     />
-    {/* Dark theme → light favicon (visible on dark bg) */}
+    {/* Dark theme → trimmed image, natural size */}
     <img
-      src={faviconImg}
+      src={faviconWebp}
       alt="LedgerCart"
-      style={{ width: 64, height: 64, objectFit: 'contain', display: 'none' }}
+      style={{ width: 64, height: 64, objectFit: 'contain' }}
       className="hidden dark:block"
+      width="64" height="64"
     />
   </div>
 )
@@ -714,6 +719,54 @@ const FlowDiagram = () => (
   </div>
 )
 
+/* ─── SCALED FLOW DIAGRAM ────────────────────────────────────────
+   Measures its container width on every resize and applies
+   transform: scale(containerW / 1080) — identical design, smaller
+   on narrow screens. On desktop (≥1080px) scale stays 1.0 exactly.
+─────────────────────────────────────────────────────────────────── */
+const ScaledFlowDiagram = () => {
+  const outerRef = useRef(null)
+  const [scale, setScale] = useState(1)
+
+  useEffect(() => {
+    const measure = () => {
+      if (!outerRef.current) return
+      const availW = outerRef.current.offsetWidth
+      setScale(Math.min(1, availW / SVG_W))
+    }
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [])
+
+  const diagramH = TOTAL_H + 48   // exact height rendered by FlowDiagram
+
+  return (
+    <div
+      ref={outerRef}
+      style={{
+        width: '100%',
+        // shrink wrapper height to match scaled content so nothing collapses
+        height: diagramH * scale + 52,
+        overflow: 'hidden',
+        position: 'relative',
+      }}
+    >
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: SVG_W,
+        height: diagramH,
+        transform: `scale(${scale})`,
+        transformOrigin: 'top left',
+      }}>
+        <FlowDiagram />
+      </div>
+    </div>
+  )
+}
+
 /* ══════════════════════════════════════════════════════════════════
    HERO SECTION
 ══════════════════════════════════════════════════════════════════ */
@@ -755,7 +808,7 @@ export default function Hero() {
       <div style={{
         maxWidth: 1160,
         margin: '0 auto',
-        padding: '60px 32px 0',
+        padding: '60px 16px 0',
         position: 'relative',
       }}>
 
@@ -788,7 +841,7 @@ export default function Hero() {
 
           {/* H1 headline */}
           <h1 style={{
-            fontSize: 'clamp(38px, 4.6vw, 60px)',
+            fontSize: 'clamp(28px, 4.6vw, 60px)',
             fontWeight: 280,
             letterSpacing: '-0.04em',
             lineHeight: 1.06,
@@ -812,7 +865,7 @@ export default function Hero() {
 
           {/* Subtitle */}
           <p style={{
-            fontSize: 17,
+            fontSize: 'clamp(14px, 2vw, 17px)',
             color: 'var(--homehero-muted)',
             lineHeight: 1.7,
             maxWidth: 480,
@@ -839,7 +892,7 @@ export default function Hero() {
             Custom Software, Cybersecurity, and the LedgerCart ERP.
           </p>
 
-          {/* ── CTA Buttons — pill style matching merge.dev ── */}
+          {/* CTA Buttons */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
 
             {/* Primary — dark pill */}
@@ -894,12 +947,11 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ═══ FLOW DIAGRAM (open / no card wrapper) ═══════════════ */}
-        <div style={{ overflowX: 'auto', paddingBottom: 52 }}>
-          <FlowDiagram />
-        </div>
+        {/* ═══ FLOW DIAGRAM — auto-scales to fit any screen width ══ */}
+        <ScaledFlowDiagram />
 
       </div>
     </section>
   )
 }
+

@@ -1,16 +1,54 @@
-# React + Vite
+# LedgerCart Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Official website for **LedgerCart** — an IT services company delivering custom software, cybersecurity, and enterprise ERP solutions.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 19** + **Vite 5** — frontend framework and build tooling
+- **Tailwind CSS 3** — utility-first styling
+- **Supabase** — backend (blogs, careers, admin auth)
+- **Netlify** — hosting with CDN and edge cache headers
 
-## React Compiler
+## Local Development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev        # starts dev server at http://localhost:5173
+```
 
-## Expanding the ESLint configuration
+## Build & Deploy
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm run build      # production build → dist/
+                   # auto-generates sitemap.xml + robots.txt via postbuild
+```
+
+Deploys automatically on push to `main` via Netlify CI.
+
+## Project Structure
+
+```
+public/            # Static assets (favicons, og-image, headers)
+src/
+  assets/          # App images (WebP, processed by Vite)
+  components/      # Shared layout components (Navbar, Footer, etc.)
+  context/         # React context (ThemeContext, AuthContext)
+  lib/             # Utilities (seo.js, supabase.js)
+  pages/           # Route-level page components
+scripts/           # Build-time scripts (SEO file generation)
+```
+
+## Environment Variables
+
+Copy `.env.example` to `.env` and fill in your Supabase credentials:
+
+```
+VITE_SUPABASE_URL=...
+VITE_SUPABASE_ANON_KEY=...
+SITE_URL=https://ledgercart.in
+```
+
+## License
+
+© 2026 LedgerCart IT Solutions. All rights reserved.  
+LedgerCart® is a registered trademark.
