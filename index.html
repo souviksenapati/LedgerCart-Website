@@ -3,8 +3,11 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="/favicon_dark.png" media="(prefers-color-scheme: light)" />
-  <link rel="icon" type="image/png" href="/favicon.png" media="(prefers-color-scheme: dark)" />
+  <!-- Favicon hierarchy: ICO for widest browser compatibility, PNG as fallback -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_dark.png" media="(prefers-color-scheme: light)" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" media="(prefers-color-scheme: dark)" />
+  <link rel="apple-touch-icon" href="/favicon_dark.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LedgerCart – IT Services, Cybersecurity & ERP</title>
   <meta name="description"
@@ -16,25 +19,40 @@
   <!-- Open Graph / Twitter (baseline defaults; route-level tags set in-app) -->
   <meta property="og:site_name" content="LedgerCart" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="LedgerCart – IT Services, Cybersecurity & ERP" />
+  <meta property="og:url" content="https://ledgercart.in/" />
+  <meta property="og:title" content="LedgerCart – IT Services, Cybersecurity &amp; ERP" />
   <meta property="og:description"
     content="LedgerCart delivers custom software, cybersecurity, and ERP solutions to help teams modernize operations and scale with confidence." />
-  <meta property="og:image" content="/og-image.png" />
-  <meta property="og:image:alt" content="LedgerCart – IT Services, Cybersecurity & ERP" />
+  <meta property="og:image" content="https://ledgercart.in/og-image.webp" />
+  <meta property="og:image:type" content="image/webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="LedgerCart – IT Services, Cybersecurity &amp; ERP" />
+
+  <!-- Canonical URL (prevents duplicate content issues) -->
+  <link rel="canonical" href="https://ledgercart.in/" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="LedgerCart – IT Services, Cybersecurity & ERP" />
+  <meta name="twitter:site" content="@ledgercart" />
+  <meta name="twitter:title" content="LedgerCart – IT Services, Cybersecurity &amp; ERP" />
   <meta name="twitter:description"
     content="LedgerCart delivers custom software, cybersecurity, and ERP solutions to help teams modernize operations and scale with confidence." />
-  <meta name="twitter:image" content="/og-image.png" />
-  <meta name="twitter:image:alt" content="LedgerCart – IT Services, Cybersecurity & ERP" />
+  <meta name="twitter:image" content="https://ledgercart.in/og-image.webp" />
+  <meta name="twitter:image:alt" content="LedgerCart – IT Services, Cybersecurity &amp; ERP" />
 
-  <!-- Preload primary font -->
+  <!-- Geo / Local SEO signals -->
+  <meta name="geo.region" content="IN-WB" />
+  <meta name="geo.placename" content="Kolkata, West Bengal, India" />
+  <meta name="geo.position" content="22.5726;88.3639" />
+  <meta name="ICBM" content="22.5726, 88.3639" />
+
+  <!-- hreflang: tells Google this site targets English speakers in India -->
+  <link rel="alternate" hreflang="en-IN" href="https://ledgercart.in/" />
+  <link rel="alternate" hreflang="en" href="https://ledgercart.in/" />
+
+  <!-- Preconnect to Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- Database Preconnect (Vite replaces %ENV%) -->
-  <link rel="preconnect" href="%VITE_SUPABASE_URL%">
 
   <!-- Render-blocking CSS to prevent unstyled React mount -->
   <link rel="stylesheet" href="/src/index.css" />
@@ -117,6 +135,67 @@
     </div>
   </div>
   <script type="module" src="/src/main.jsx"></script>
+
+  <!-- JSON-LD Structured Data: Organization + WebSite schemas -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://ledgercart.in/#organization",
+        "name": "LedgerCart",
+        "legalName": "LedgerCart IT Solutions",
+        "url": "https://ledgercart.in",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://ledgercart.in/og-image.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "description": "LedgerCart delivers custom software, cybersecurity, and ERP solutions to help teams modernize operations and scale with confidence.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Moni Bhander, Module C, WEBEL Bhawan, EP & GP Block, Sector V",
+          "addressLocality": "Salt Lake, Kolkata",
+          "addressRegion": "West Bengal",
+          "postalCode": "700091",
+          "addressCountry": "IN"
+        },
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "contactType": "sales",
+            "email": "sales@ledgercart.in"
+          },
+          {
+            "@type": "ContactPoint",
+            "contactType": "technical support",
+            "email": "support@ledgercart.in"
+          }
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/company/ledgercart/"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://ledgercart.in/#website",
+        "url": "https://ledgercart.in",
+        "name": "LedgerCart",
+        "publisher": { "@id": "https://ledgercart.in/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://ledgercart.in/blog?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+  }
+  </script>
 </body>
 
 </html>

@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import ContactModal from '../shared/ContactModal'
-import logoImg from '../../assets/logo.png'
-import logoDarkImg from '../../assets/logo_dark.png'
-import faviconImg from '../../assets/favicon.png'
-import faviconDarkImg from '../../assets/favicon_dark.png'
-import erpLogoLight from '../../assets/LedgerCart ERP Logo Light.png'
-import erpLogoDark from '../../assets/LedgerCart ERP Logo Dark.png'
+import logoWebp from '../../assets/logo.webp'
+import logoDarkWebp from '../../assets/logo_dark.webp'
+import faviconWebp from '../../assets/favicon.webp'
+import faviconDarkWebp from '../../assets/favicon_dark.webp'
+import erpLogoLightWebp from '../../assets/LedgerCart ERP Logo Light.webp'
+import erpLogoDarkWebp from '../../assets/LedgerCart ERP Logo Dark.webp'
 
 const PRODUCTS_ITEMS = [
   { to: '/product', title: 'All Products' },
@@ -54,8 +54,8 @@ function NeedAssistanceCard() {
   return (
     <div className="bg-[#f0f9ff] dark:bg-orange-950/20 p-6 rounded-2xl border border-blue-100/50 dark:border-orange-900/20 flex flex-col items-center text-center max-w-[240px]">
       <div className="mb-4 bg-white dark:bg-slate-800 p-2 rounded-xl shadow-sm">
-        <img src={faviconDarkImg} alt="LedgerCart" className="w-[50px] h-[50px] object-contain dark:hidden" />
-        <img src={faviconImg}     alt="LedgerCart" className="w-[50px] h-[50px] object-contain hidden dark:block" />
+        <img src={faviconDarkWebp} alt="LedgerCart" className="w-[50px] h-[50px] object-contain dark:hidden" width="50" height="50" />
+        <img src={faviconWebp} alt="LedgerCart" className="w-[50px] h-[50px] object-contain hidden dark:block" width="50" height="50" />
       </div>
       <h4 className="text-[15px] font-bold text-gray-900 dark:text-slate-100 mb-2 leading-snug">Need Assistance?<br />Schedule a Meeting Now!</h4>
       <Link 
@@ -81,8 +81,8 @@ function DropMenu({ items, columns = 1 }) {
               className="py-1.5 no-underline inline-flex items-center"
               aria-label={item.title}
             >
-              <img src={erpLogoLight} alt={item.title} className="h-9 w-auto object-contain dark:hidden" />
-              <img src={erpLogoDark} alt={item.title} className="h-9 w-auto object-contain hidden dark:block" />
+              <img src={erpLogoLightWebp} alt={item.title} className="h-9 w-auto object-contain dark:hidden" height="36" />
+              <img src={erpLogoDarkWebp} alt={item.title} className="h-9 w-auto object-contain hidden dark:block" height="36" />
             </Link>
           ) : (
             <Link
@@ -138,8 +138,8 @@ export default function Navbar() {
 
         {/* Logo — light/dark swap */}
         <Link to="/" className="flex items-center flex-shrink-0">
-          <img src={logoDarkImg} alt="LedgerCart" className="h-[44px] w-auto object-contain dark:hidden" />
-          <img src={logoImg}     alt="LedgerCart" className="h-[44px] w-auto object-contain hidden dark:block" />
+          <img src={logoDarkWebp} alt="LedgerCart" className="h-[44px] w-auto object-contain dark:hidden" height="44" />
+          <img src={logoWebp} alt="LedgerCart" className="h-[44px] w-auto object-contain hidden dark:block" height="44" />
         </Link>
 
         {/* Desktop links */}

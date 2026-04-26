@@ -1,15 +1,13 @@
 import { memo } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTheme } from '../../context/ThemeContext'
-import logoImg from '../../assets/logo.png'
-import logoDarkImg from '../../assets/logo_dark.png'
+import logoWebp from '../../assets/logo.webp'
+import logoDarkWebp from '../../assets/logo_dark.webp'
 
 const Logo = () => (
   <Link to="/" className="flex items-center mb-5 no-underline">
-    {/* Light site theme → dark logo (visible on white bg) */}
-    <img src={logoDarkImg} alt="LedgerCart" className="h-[40px] w-auto object-contain dark:hidden" />
-    {/* Dark site theme → normal logo (visible on dark bg) */}
-    <img src={logoImg}     alt="LedgerCart" className="h-[40px] w-auto object-contain hidden dark:block" />
+    <img src={logoDarkWebp} alt="LedgerCart" className="h-[40px] w-auto object-contain dark:hidden" height="40" />
+    <img src={logoWebp} alt="LedgerCart" className="h-[40px] w-auto object-contain hidden dark:block" height="40" />
   </Link>
 )
 

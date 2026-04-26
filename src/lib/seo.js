@@ -1,5 +1,8 @@
 const DEFAULT_SITE_NAME = 'LedgerCart'
-const DEFAULT_OG_IMAGE_PATH = '/og-image.png'
+const DEFAULT_OG_IMAGE_PATH = '/og-image.webp'
+
+// IDs that are global and must NEVER be removed on route change
+const GLOBAL_JSON_LD_IDS = new Set(['org', 'website'])
 
 function upsertMetaTag(selector, createAttrs) {
   if (typeof document === 'undefined') return null
@@ -66,9 +69,33 @@ export function setJsonLd(id, json) {
   try {
     el.textContent = JSON.stringify(json)
   } catch {
-    // If JSON serialization fails, remove content rather than leaving stale data.
     el.textContent = ''
   }
+}
+
+/**
+ * Remove a specific JSON-LD block by its data-jsonld id.
+ * Safe to call even if the element doesn't exist.
+ */
+export function removeJsonLd(id) {
+  if (typeof document === 'undefined') return
+  const el = document.querySelector(`script[type="application/ld+json"][data-jsonld="${id}"]`)
+  if (el) el.remove()
+}
+
+/**
+ * Remove all page-specific JSON-LD blocks (i.e., everything except 'org' and 'website').
+ * Call this at the START of each route change before injecting new page schemas.
+ */
+export function removePageJsonLd() {
+  if (typeof document === 'undefined') return
+  const all = document.querySelectorAll('script[type="application/ld+json"][data-jsonld]')
+  all.forEach(el => {
+    const id = el.getAttribute('data-jsonld')
+    if (!GLOBAL_JSON_LD_IDS.has(id)) {
+      el.remove()
+    }
+  })
 }
 
 export function applySeo({
@@ -91,7 +118,11 @@ export function applySeo({
   const canonical = canonicalUrl || (origin ? `${origin}${window.location.pathname}` : '')
   if (canonical) setCanonicalUrl(canonical)
 
-  const resolvedImageUrl = imageUrl || (origin ? `${origin}${DEFAULT_OG_IMAGE_PATH}` : DEFAULT_OG_IMAGE_PATH)
+  // Always use absolute URL for OG image
+  let resolvedImageUrl = imageUrl || (origin ? `${origin}${DEFAULT_OG_IMAGE_PATH}` : DEFAULT_OG_IMAGE_PATH)
+  if (resolvedImageUrl && resolvedImageUrl.startsWith('/') && origin) {
+    resolvedImageUrl = `${origin}${resolvedImageUrl}`
+  }
 
   // Open Graph
   setMetaByProperty('og:site_name', siteName)

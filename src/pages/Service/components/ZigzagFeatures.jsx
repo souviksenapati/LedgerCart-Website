@@ -7,7 +7,7 @@ import AIVisual from './visuals/AIVisual'
 import WebDevVisual from './visuals/WebDevVisual'
 import ErpVisual from './visuals/ErpVisual'
 import CybersecurityVisual from './visuals/CybersecurityVisual'
-import fallbackServiceImage from '../../../assets/hero.png'
+import fallbackServiceImageWebp from '../../../assets/hero.webp'
 
 const zigzagRows = [
   {
@@ -316,7 +316,7 @@ export default function ZigzagFeatures() {
                   loading="lazy"
                   onError={(e) => {
                     e.currentTarget.onerror = null
-                    e.currentTarget.src = fallbackServiceImage
+                    e.currentTarget.src = fallbackServiceImageWebp
                   }}
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />

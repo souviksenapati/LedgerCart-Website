@@ -5,7 +5,7 @@ import Navbar from '../../components/layout/Navbar'
 import Footer from '../../components/layout/Footer'
 import { supabase } from '../../lib/supabase'
 import DOMPurify from 'dompurify'
-import { applySeo } from '../../lib/seo'
+import { applySeo, setJsonLd, removeJsonLd } from '../../lib/seo'
 
 export default function BlogPostDetail() {
   const { slug } = useParams()
@@ -27,13 +27,34 @@ export default function BlogPostDetail() {
           setPost(data)
 
           const origin = window.location.origin
+          const absImg = data.image_url || `${origin}/og-image.webp`
+
           applySeo({
             title: `${data.title} | LedgerCart Blog`,
             description: data.excerpt || 'Read the latest insights from LedgerCart on engineering, ERP, and secure software delivery.',
             canonicalUrl: `${origin}/blog/${data.slug}`,
             robots: 'index, follow',
             ogType: 'article',
-            imageUrl: data.image_url || `${origin}/og-image.png`,
+            imageUrl: absImg,
+            imageAlt: data.title,
+          })
+
+          // Article JSON-LD — enables Google rich results (author, date, image in SERP)
+          setJsonLd('article', {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            '@id': `${origin}/blog/${data.slug}#article`,
+            headline: data.title,
+            description: data.excerpt || 'LedgerCart Blog',
+            image: absImg,
+            author: { '@type': 'Person', name: data.author || 'LedgerCart Team', url: origin },
+            publisher: { '@type': 'Organization', name: 'LedgerCart', url: origin, logo: { '@type': 'ImageObject', url: `${origin}/og-image.webp` } },
+            datePublished: data.published_at || data.created_at,
+            dateModified: data.updated_at || data.published_at || data.created_at,
+            mainEntityOfPage: { '@type': 'WebPage', '@id': `${origin}/blog/${data.slug}` },
+            url: `${origin}/blog/${data.slug}`,
+            articleSection: data.category || 'Technology',
+            inLanguage: 'en-IN',
           })
         }
       } catch (err) {
@@ -43,6 +64,9 @@ export default function BlogPostDetail() {
     }
 
     fetchPost()
+
+    // Clean up article JSON-LD when unmounting / navigating away
+    return () => removeJsonLd('article')
   }, [slug])
 
   if (loading) {
@@ -71,7 +95,13 @@ export default function BlogPostDetail() {
         <article className="max-w-3xl mx-auto">
           {post.image_url && (
             <div className="w-full aspect-[21/9] rounded-3xl overflow-hidden mb-10 shadow-lg border border-gray-100 dark:border-slate-800">
-              <img src={post.image_url} alt={post.title} className="w-full h-full object-cover" />
+              <img
+                src={post.image_url}
+                alt={post.title}
+                className="w-full h-full object-cover"
+                fetchpriority="high"
+                decoding="async"
+              />
             </div>
           )}
           <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-bold text-orange-600 mb-8 no-underline uppercase tracking-widest">

@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import AnnouncementBar from '../../components/layout/AnnouncementBar'
 import Navbar from '../../components/layout/Navbar'
 import Footer from '../../components/layout/Footer'
-import { applySeo } from '../../lib/seo'
+import { applySeo, setJsonLd, removeJsonLd } from '../../lib/seo'
 
 const CASE_STUDIES = [
   {
@@ -57,8 +57,9 @@ export default function CaseStudyDetail() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-
     const origin = window.location.origin
+    const absImg = `${origin}/og-image.webp`
+
     if (study) {
       applySeo({
         title: `${study.client} Success Story | LedgerCart`,
@@ -66,7 +67,26 @@ export default function CaseStudyDetail() {
         canonicalUrl: `${origin}/case-studies/${study.slug}`,
         robots: 'index, follow',
         ogType: 'article',
-        imageUrl: `${origin}/og-image.png`,
+        imageUrl: absImg,
+        imageAlt: study.title,
+      })
+
+      // Article JSON-LD for case study — signals authoritative content to Google
+      setJsonLd('case-study-article', {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        '@id': `${origin}/case-studies/${study.slug}#article`,
+        headline: study.title,
+        description: `${study.client} case study: how LedgerCart delivered measurable impact through secure software and ERP modernization in the ${study.industry} industry.`,
+        author: { '@type': 'Organization', name: 'LedgerCart', url: origin },
+        publisher: { '@type': 'Organization', name: 'LedgerCart', url: origin, logo: { '@type': 'ImageObject', url: absImg } },
+        datePublished: '2024-01-01',
+        dateModified: new Date().toISOString().split('T')[0],
+        mainEntityOfPage: { '@type': 'WebPage', '@id': `${origin}/case-studies/${study.slug}` },
+        url: `${origin}/case-studies/${study.slug}`,
+        about: { '@type': 'Thing', name: `${study.industry} ERP Implementation` },
+        keywords: `ERP, ${study.industry}, LedgerCart, ${study.client}, IT Services`,
+        inLanguage: 'en-IN',
       })
     } else {
       applySeo({
@@ -75,9 +95,11 @@ export default function CaseStudyDetail() {
         canonicalUrl: `${origin}/case-studies/${slug}`,
         robots: 'noindex, follow',
         ogType: 'website',
-        imageUrl: `${origin}/og-image.png`,
+        imageUrl: absImg,
       })
     }
+
+    return () => removeJsonLd('case-study-article')
   }, [slug, study])
 
   if (!study) {

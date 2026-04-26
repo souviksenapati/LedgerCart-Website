@@ -1,0 +1,39 @@
+# Netlify HTTP Headers for LedgerCart Website
+# Docs: https://docs.netlify.com/routing/headers/
+
+# ── Immutable versioned assets (Vite hashes filenames) ──────────────────────
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# ── WebP images ─────────────────────────────────────────────────────────────
+/*.webp
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+  Content-Type: image/webp
+
+# ── PNG images ───────────────────────────────────────────────────────────────
+/*.png
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# ── SVG ──────────────────────────────────────────────────────────────────────
+/*.svg
+  Cache-Control: public, max-age=86400
+
+# ── Favicon ICO ──────────────────────────────────────────────────────────────
+/favicon.ico
+  Cache-Control: public, max-age=86400
+
+# ── SEO files (crawlers should see fresh versions) ───────────────────────────
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+  Content-Type: application/xml; charset=utf-8
+
+/robots.txt
+  Cache-Control: public, max-age=3600
+
+# ── Security headers (all pages) ─────────────────────────────────────────────
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
