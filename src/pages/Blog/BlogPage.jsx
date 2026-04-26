@@ -88,6 +88,8 @@ export default function BlogPage() {
                       src={post.image_url || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1280&auto=format&fit=crop'} 
                       alt={post.title} 
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
+                      decoding="async"
                     />
                     <div className="absolute top-4 left-4">
                       <span className="px-3 py-1 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm text-[10px] font-bold uppercase tracking-widest text-orange-600 rounded-lg shadow-sm">{post.category}</span>

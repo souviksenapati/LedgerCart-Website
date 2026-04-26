@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+
 import AnnouncementBar from '../../components/layout/AnnouncementBar'
 import Navbar from '../../components/layout/Navbar'
 import Footer from '../../components/layout/Footer'
@@ -6,10 +6,6 @@ import ContactHero from './components/ContactHero'
 import ContactGrid from './components/ContactGrid'
 
 export default function ContactPage() {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-    document.title = 'Contact Us - LedgerCart'
-  }, [])
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#0a0f1a] flex flex-col font-sans text-gray-900 dark:text-slate-100 selection:bg-orange-500/30 selection:text-orange-900 transition-colors duration-300">

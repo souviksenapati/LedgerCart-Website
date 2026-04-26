@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '../../../context/AuthContext'
-import logoImg from '../../../assets/logo.png'
-import logoDarkImg from '../../../assets/logo_dark.png'
+import logoWebp from '../../../assets/logo.webp'
+import logoDarkWebp from '../../../assets/logo_dark.webp'
 
 export default function AdminLogin() {
   const { login } = useAuth()
@@ -35,8 +35,8 @@ export default function AdminLogin() {
       <div className="relative z-10 w-full max-w-[420px]">
         {/* Logo */}
         <div className="flex items-center justify-center mb-10">
-          <img src={logoDarkImg} alt="LedgerCart" className="h-[48px] w-auto object-contain dark:hidden" />
-          <img src={logoImg}     alt="LedgerCart" className="h-[48px] w-auto object-contain hidden dark:block" />
+          <img src={logoDarkWebp} alt="LedgerCart" className="h-[48px] w-auto object-contain dark:hidden" height="48" />
+          <img src={logoWebp} alt="LedgerCart" className="h-[48px] w-auto object-contain hidden dark:block" height="48" />
         </div>
 
         {/* Card */}
