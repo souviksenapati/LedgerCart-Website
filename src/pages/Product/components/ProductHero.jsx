@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import erpLogoLight from '../../../assets/LedgerCart ERP Logo Light.png'
-import erpLogoDark from '../../../assets/LedgerCart ERP Logo Dark.png'
+import erpLogoLightWebp from '../../../assets/LedgerCart ERP Logo Light.webp'
+import erpLogoDarkWebp from '../../../assets/LedgerCart ERP Logo Dark.webp'
 
 export default function ProductHero() {
   return (
@@ -14,8 +14,8 @@ export default function ProductHero() {
       <div className="max-w-[1280px] mx-auto px-6 text-center relative z-10">
         <div className="flex items-center justify-center mb-8">
           <div className="inline-flex items-center justify-center rounded-2xl bg-white/70 dark:bg-slate-900/40 border border-gray-200/70 dark:border-slate-800 px-5 py-3 shadow-sm backdrop-blur">
-            <img src={erpLogoLight} alt="LedgerCart ERP" className="h-[56px] w-auto object-contain dark:hidden" />
-            <img src={erpLogoDark} alt="LedgerCart ERP" className="h-[56px] w-auto object-contain hidden dark:block" />
+            <img src={erpLogoLightWebp} alt="LedgerCart ERP" className="h-[56px] w-auto object-contain dark:hidden" height="56" fetchpriority="high" decoding="async" />
+            <img src={erpLogoDarkWebp} alt="LedgerCart ERP" className="h-[56px] w-auto object-contain hidden dark:block" height="56" fetchpriority="high" decoding="async" />
           </div>
         </div>
 

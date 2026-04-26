@@ -2,8 +2,8 @@ import AnnouncementBar from '../../components/layout/AnnouncementBar'
 import Navbar from '../../components/layout/Navbar'
 import Footer from '../../components/layout/Footer'
 import { Link } from 'react-router-dom'
-import erpLogoLight from '../../assets/LedgerCart ERP Logo Light.png'
-import erpLogoDark from '../../assets/LedgerCart ERP Logo Dark.png'
+import erpLogoLightWebp from '../../assets/LedgerCart ERP Logo Light.webp'
+import erpLogoDarkWebp from '../../assets/LedgerCart ERP Logo Dark.webp'
 
 export default function ProductPage() {
   return (
@@ -36,8 +36,8 @@ export default function ProductPage() {
                 <div className="flex items-center justify-between gap-6">
                   <div className="flex items-center gap-4 min-w-0">
                     <div className="h-11 w-[150px] flex items-center">
-                      <img src={erpLogoLight} alt="LedgerCart ERP" className="h-10 w-auto object-contain dark:hidden" />
-                      <img src={erpLogoDark} alt="LedgerCart ERP" className="h-10 w-auto object-contain hidden dark:block" />
+                      <img src={erpLogoLightWebp} alt="LedgerCart ERP" className="h-10 w-auto object-contain dark:hidden" height="40" fetchpriority="high" decoding="async" />
+                      <img src={erpLogoDarkWebp} alt="LedgerCart ERP" className="h-10 w-auto object-contain hidden dark:block" height="40" fetchpriority="high" decoding="async" />
                     </div>
                     <div className="min-w-0">
                       <div className="text-[15px] font-extrabold tracking-[-0.2px] text-gray-900 dark:text-slate-100 truncate">
